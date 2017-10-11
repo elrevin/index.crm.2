@@ -8,6 +8,13 @@ import me.elrevin.indexcrm.di.module.ApplicationModule;
 
 public class CustomApp extends Application {
     private static ApplicationComponent applicationComponent;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        initComponent();
+    }
+
     private void initComponent() {
         applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
     }

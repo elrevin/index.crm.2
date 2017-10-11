@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import me.elrevin.indexcrm.CustomApp;
+import me.elrevin.indexcrm.common.CurrentUser;
 
 @Module
 public class ApplicationModule {
@@ -25,7 +26,13 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    LayoutInflater provideLayoutInflater() {
+    public LayoutInflater provideLayoutInflater() {
         return (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    @Provides
+    @Singleton
+    public CurrentUser provideCurrentUser() {
+        return new CurrentUser(app);
     }
 }
