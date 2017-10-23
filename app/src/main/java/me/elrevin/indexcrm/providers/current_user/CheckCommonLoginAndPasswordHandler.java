@@ -1,4 +1,4 @@
-package me.elrevin.indexcrm.common;
+package me.elrevin.indexcrm.providers.current_user;
 
 public interface CheckCommonLoginAndPasswordHandler {
     void onRequestFailure(Throwable t);

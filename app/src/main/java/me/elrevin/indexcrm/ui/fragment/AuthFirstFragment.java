@@ -18,8 +18,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import me.elrevin.indexcrm.CustomApp;
 import me.elrevin.indexcrm.R;
-import me.elrevin.indexcrm.common.CheckCommonLoginAndPasswordHandler;
-import me.elrevin.indexcrm.common.CurrentUser;
+import me.elrevin.indexcrm.providers.current_user.CheckCommonLoginAndPasswordHandler;
+import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 import me.elrevin.indexcrm.ui.activity.BaseActivity;
 
 /**
@@ -28,7 +28,7 @@ import me.elrevin.indexcrm.ui.activity.BaseActivity;
 public class AuthFirstFragment extends BaseFragment implements CheckCommonLoginAndPasswordHandler {
 
     @Inject
-    public CurrentUser currentUser;
+    public CurrentUserProvider currentUserProvider;
 
     @BindView(R.id.btnGo)
     Button btnGo;
@@ -68,10 +68,10 @@ public class AuthFirstFragment extends BaseFragment implements CheckCommonLoginA
 
     @OnClick(R.id.btnGo)
     public void btnGoClick(View v) {
-        currentUser.setLogin(etLogin.getText().toString());
-        currentUser.setPassword(etPassword.getText().toString());
+        currentUserProvider.setLogin(etLogin.getText().toString());
+        currentUserProvider.setPassword(etPassword.getText().toString());
 
-        currentUser.checkCommonLoginAndPassword(this);
+        currentUserProvider.checkCommonLoginAndPassword(this);
     }
 
     @Override

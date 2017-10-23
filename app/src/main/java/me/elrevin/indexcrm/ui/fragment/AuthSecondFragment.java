@@ -17,9 +17,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import me.elrevin.indexcrm.CustomApp;
 import me.elrevin.indexcrm.R;
-import me.elrevin.indexcrm.common.CheckPersonalLoginAndPasswordHandler;
-import me.elrevin.indexcrm.common.CurrentUser;
-import me.elrevin.indexcrm.rest.api.ApiMethods;
+import me.elrevin.indexcrm.providers.current_user.CheckPersonalLoginAndPasswordHandler;
+import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 import me.elrevin.indexcrm.ui.activity.BaseActivity;
 
 /**
@@ -28,7 +27,7 @@ import me.elrevin.indexcrm.ui.activity.BaseActivity;
 public class AuthSecondFragment extends BaseFragment {
 
     @Inject
-    public CurrentUser currentUser;
+    public CurrentUserProvider currentUserProvider;
 
     @BindView(R.id.btnEnter)
     Button btnEnter;
@@ -71,7 +70,7 @@ public class AuthSecondFragment extends BaseFragment {
     public void onBtnEnterClick(View view) {
         String login = etLogin.getText().toString();
         String password = etPassword.getText().toString();
-        currentUser.checkPersonalLoginAndPassword(login, password, new CheckPersonalLoginAndPasswordHandler() {
+        currentUserProvider.checkPersonalLoginAndPassword(login, password, new CheckPersonalLoginAndPasswordHandler() {
             @Override
             public void onRequestFailure(Throwable t) {
                 Toast.makeText(getBaseActivity(), "Ошибка сети", Toast.LENGTH_LONG).show();

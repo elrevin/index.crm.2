@@ -3,9 +3,10 @@ package me.elrevin.indexcrm.di.component;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import me.elrevin.indexcrm.common.CurrentUser;
+import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 import me.elrevin.indexcrm.di.module.RestModule;
 import me.elrevin.indexcrm.mvp.presenter.MainPresenter;
+import me.elrevin.indexcrm.providers.tasks.TasksProvider;
 import me.elrevin.indexcrm.rest.models.BaseRequestModel;
 import me.elrevin.indexcrm.ui.activity.BaseActivity;
 import me.elrevin.indexcrm.ui.activity.LoginActivity;
@@ -30,8 +31,9 @@ public interface ApplicationComponent {
     // Presenters
     void inject(MainPresenter presenter);
 
-    // Common
-    void inject(CurrentUser currentUser);
+    // Providers
+    void inject(CurrentUserProvider currentUserProvider);
+    void inject(TasksProvider tasksProvider);
 
     // models
     void inject(BaseRequestModel baseRequestModel);

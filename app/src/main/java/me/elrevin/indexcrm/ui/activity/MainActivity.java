@@ -10,8 +10,14 @@ import me.elrevin.indexcrm.Constants;
 import me.elrevin.indexcrm.R;
 import me.elrevin.indexcrm.mvp.presenter.MainPresenter;
 import me.elrevin.indexcrm.mvp.view.MainView;
+import me.elrevin.indexcrm.ui.fragment.MainScreenFragment;
 
 public class MainActivity extends BaseActivity implements MainView {
+
+    @Override
+    protected boolean haveToolbar() {
+        return true;
+    }
 
     @InjectPresenter
     public MainPresenter mainPresenter;
@@ -21,6 +27,10 @@ public class MainActivity extends BaseActivity implements MainView {
         super.onCreate(savedInstanceState);
 
         mainPresenter.checkAuth();
+    }
+
+    private void setUpUi() {
+        setContent(new MainScreenFragment());
     }
 
     @Override
@@ -36,18 +46,18 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void afterLogin() {
-        Toast.makeText(this, "After login", Toast.LENGTH_LONG).show();
+        setUpUi();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constants.REQUEST_CODE_LOGIN) {
             if (resultCode == Constants.RESULT_OK) {
-                Toast.makeText(this, "Login Ok", Toast.LENGTH_LONG).show();
+                setUpUi();
             } else {
                 Toast.makeText(this, "Login Fail", Toast.LENGTH_LONG).show();
             }
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }

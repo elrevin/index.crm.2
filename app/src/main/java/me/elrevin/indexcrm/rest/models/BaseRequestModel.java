@@ -6,12 +6,12 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import me.elrevin.indexcrm.CustomApp;
-import me.elrevin.indexcrm.common.CurrentUser;
+import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 
 public abstract class BaseRequestModel {
 
     @Inject
-    public CurrentUser currentUser;
+    public CurrentUserProvider currentUserProvider;
 
     protected String method;
     protected String module;
@@ -21,8 +21,8 @@ public abstract class BaseRequestModel {
     BaseRequestModel() {
         CustomApp.getApplicationComponent().inject(this);
 
-        userId = this.currentUser.getId();
-        token = this.currentUser.getToken();
+        userId = this.currentUserProvider.getId();
+        token = this.currentUserProvider.getToken();
     }
 
     public Map<String, String> toMap() {

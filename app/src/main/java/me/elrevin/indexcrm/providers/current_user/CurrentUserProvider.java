@@ -1,4 +1,4 @@
-package me.elrevin.indexcrm.common;
+package me.elrevin.indexcrm.providers.current_user;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -21,7 +21,7 @@ import me.elrevin.indexcrm.rest.models.CheckAuthRequestModel;
 import me.elrevin.indexcrm.rest.models.CheckPersonalLoginAndPasswordRequestModel;
 import retrofit2.Response;
 
-public class CurrentUser {
+public class CurrentUserProvider {
     private String id;
     private String token;
     private String login;
@@ -38,7 +38,7 @@ public class CurrentUser {
 
     private SharedPreferences preferences;
 
-    public CurrentUser(CustomApp app) {
+    public CurrentUserProvider(CustomApp app) {
         CustomApp.getApplicationComponent().inject(this);
 
         preferences = PreferenceManager.getDefaultSharedPreferences(app);

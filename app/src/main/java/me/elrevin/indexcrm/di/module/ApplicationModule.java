@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import me.elrevin.indexcrm.CustomApp;
-import me.elrevin.indexcrm.common.CurrentUser;
+import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 import me.elrevin.indexcrm.common.FragmentManager;
 
 @Module
@@ -33,8 +33,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public CurrentUser provideCurrentUser() {
-        return new CurrentUser(app);
+    public CurrentUserProvider provideCurrentUser() {
+        return new CurrentUserProvider(app);
     }
 
     @Provides

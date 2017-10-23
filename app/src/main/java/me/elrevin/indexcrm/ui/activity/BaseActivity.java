@@ -23,14 +23,16 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
     @Inject
     public FragmentManager fragmentManager;
 
-    protected boolean haveToolbar = false;
+    protected boolean haveToolbar() {
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (haveToolbar) {
-
+        if (haveToolbar()) {
+            setContentView(R.layout.activity_base_w_toolbar);
         } else {
             setContentView(R.layout.activity_base_wo_toolbar);
         }
