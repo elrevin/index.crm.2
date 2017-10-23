@@ -6,6 +6,8 @@ import com.arellomobile.mvp.MvpPresenter;
 import javax.inject.Inject;
 
 import me.elrevin.indexcrm.CustomApp;
+import me.elrevin.indexcrm.common.CheckAuthHandler;
+import me.elrevin.indexcrm.common.CheckCommonLoginAndPasswordHandler;
 import me.elrevin.indexcrm.mvp.view.MainView;
 import me.elrevin.indexcrm.common.CurrentUser;
 
@@ -20,8 +22,23 @@ public class MainPresenter extends MvpPresenter<MainView> {
     }
 
     public void checkAuth() {
-        if (currentUser.isAuth()) {
-            // check login, password and token
+        if (currentUser.haveAuthData()) {
+            currentUser.checkAuth(new CheckAuthHandler() {
+                @Override
+                public void onRequestFailure(Throwable t) {
+
+                }
+
+                @Override
+                public void onAuthFailure() {
+                    getViewState().login();
+                }
+
+                @Override
+                public void onAuthCorrect() {
+                    getViewState().afterLogin();
+                }
+            });
         } else {
             getViewState().login();
         }

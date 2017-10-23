@@ -1,4 +1,4 @@
-package me.elrevin.indexcrm.ui;
+package me.elrevin.indexcrm.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,14 +20,23 @@ public class MainActivity extends BaseActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
         mainPresenter.checkAuth();
+    }
+
+    @Override
+    protected int getMainContentLayout() {
+        return R.layout.activity_main;
     }
 
     @Override
     public void login() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivityForResult(intent, Constants.REQUEST_CODE_LOGIN);
+    }
+
+    @Override
+    public void afterLogin() {
+        Toast.makeText(this, "After login", Toast.LENGTH_LONG).show();
     }
 
     @Override

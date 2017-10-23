@@ -9,6 +9,7 @@ import dagger.Module;
 import dagger.Provides;
 import me.elrevin.indexcrm.CustomApp;
 import me.elrevin.indexcrm.common.CurrentUser;
+import me.elrevin.indexcrm.common.FragmentManager;
 
 @Module
 public class ApplicationModule {
@@ -34,5 +35,11 @@ public class ApplicationModule {
     @Singleton
     public CurrentUser provideCurrentUser() {
         return new CurrentUser(app);
+    }
+
+    @Provides
+    @Singleton
+    public FragmentManager provideFragmentManager(){
+        return new FragmentManager();
     }
 }
