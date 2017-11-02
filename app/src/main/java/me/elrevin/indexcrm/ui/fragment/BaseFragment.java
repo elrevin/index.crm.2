@@ -26,7 +26,6 @@ public abstract class BaseFragment extends MvpAppCompatFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-
     }
 
     public String createToolbarTitle() {

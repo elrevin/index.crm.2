@@ -1,4 +1,4 @@
-package me.elrevin.indexcrm.providers.tasks;
+package me.elrevin.indexcrm.providers.news;
 
 import javax.inject.Inject;
 
@@ -7,24 +7,23 @@ import io.reactivex.schedulers.Schedulers;
 import me.elrevin.indexcrm.CustomApp;
 import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 import me.elrevin.indexcrm.rest.api.ApiMethods;
-import me.elrevin.indexcrm.rest.api.GetTasksListRequest;
-import me.elrevin.indexcrm.rest.models.GetTasksListRequestModel;
+import me.elrevin.indexcrm.rest.api.GetNewstListRequest;
+import me.elrevin.indexcrm.rest.models.GetNewstListRequestModel;
 
-public class TasksProvider {
-
+public class NewsProvider {
     @Inject
     CurrentUserProvider currentUserProvider;
 
     @Inject
-    GetTasksListRequest getTasksListRequest;
+    GetNewstListRequest getNewstListRequest;
 
-    public TasksProvider() {
+    public NewsProvider() {
         CustomApp.getApplicationComponent().inject(this);
     }
 
-    public void loadList(int limit, final LoadTasksListHandler handler) {
+    public void loadList(int limit, int from, final LoadNewsListHandler handler) {
         String auth = ApiMethods.getBasicAuthString(currentUserProvider.getLogin(), currentUserProvider.getPassword());
-        getTasksListRequest.get(auth, new GetTasksListRequestModel(Integer.toString(limit)).toMap())
+        getNewstListRequest.get(auth, new GetNewstListRequestModel(limit, from).toMap())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorReturn((t) -> {
@@ -48,7 +47,7 @@ public class TasksProvider {
                         handler.onAuthFailure();
                         return;
                     }
-                    handler.onRequestFailure(new Throwable("Проблемы с сетью. TasksProvider.loadList"));
+                    handler.onRequestFailure(new Throwable("Проблемы с сетью. News.loadList"));
                 });
     }
 }

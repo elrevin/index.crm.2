@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/llClientContainer"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvClientName"
+        android:text="Название клиента"
+        android:textStyle="bold"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:text="Последний контакт:"
+                android:id="@+id/tvLastContactLabel"
+                android:textColor="@color/colorTextLight"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:layout_toRightOf="@id/tvLastContactLabel"
+                android:id="@+id/tvLastContactDate"
+                android:text="05.05.2017"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:text="Контактов:"
+                android:id="@+id/tvContactsCountLabel"
+                android:textColor="@color/colorTextLight"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8sp"
+                android:layout_toRightOf="@id/tvContactsCountLabel"
+                android:id="@+id/tvContactsCount"
+                android:text="18"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

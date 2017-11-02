@@ -3,21 +3,10 @@ package me.elrevin.indexcrm.mvp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CheckPersonalLoginAndPassword extends Base {
-    @SerializedName("token")
-    @Expose
-    private String token;
+public class BaseListItemModel {
     @SerializedName("id")
     @Expose
     private String id;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 
     public String getId() {
         return id;
@@ -26,4 +15,5 @@ public class CheckPersonalLoginAndPassword extends Base {
     public void setId(String id) {
         this.id = id;
     }
+
 }

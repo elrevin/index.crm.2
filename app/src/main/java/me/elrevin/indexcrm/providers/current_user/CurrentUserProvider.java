@@ -10,9 +10,9 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import me.elrevin.indexcrm.CustomApp;
-import me.elrevin.indexcrm.mvp.model.Base;
-import me.elrevin.indexcrm.mvp.model.CheckAuth;
-import me.elrevin.indexcrm.mvp.model.CheckPersonalLoginAndPassword;
+import me.elrevin.indexcrm.mvp.model.BaseModel;
+import me.elrevin.indexcrm.mvp.model.CheckAuthModel;
+import me.elrevin.indexcrm.mvp.model.CheckPersonalLoginAndPasswordModel;
 import me.elrevin.indexcrm.rest.api.ApiMethods;
 import me.elrevin.indexcrm.rest.api.CheckAuthRequest;
 import me.elrevin.indexcrm.rest.api.CheckCommonLoginAndPasswordRequest;
@@ -111,9 +111,9 @@ public class CurrentUserProvider {
         checkCommonLoginAndPasswordRequest.get(auth)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .onErrorReturn(new Function<Throwable, Response<Base>>() {
+                .onErrorReturn(new Function<Throwable, Response<BaseModel>>() {
                     @Override
-                    public Response<Base> apply(@NonNull Throwable throwable) throws Exception {
+                    public Response<BaseModel> apply(@NonNull Throwable throwable) throws Exception {
                         handler.onRequestFailure(throwable);
                         return null;
                     }
@@ -132,9 +132,9 @@ public class CurrentUserProvider {
         checkPersonalLoginAndPasswordRequest.get(authStr, new CheckPersonalLoginAndPasswordRequestModel(login, password).toMap())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .onErrorReturn(new Function<Throwable, Response<CheckPersonalLoginAndPassword>>() {
+                .onErrorReturn(new Function<Throwable, Response<CheckPersonalLoginAndPasswordModel>>() {
                     @Override
-                    public Response<CheckPersonalLoginAndPassword> apply(@NonNull Throwable throwable) throws Exception {
+                    public Response<CheckPersonalLoginAndPasswordModel> apply(@NonNull Throwable throwable) throws Exception {
                         handler.onRequestFailure(throwable);
                         return null;
                     }
@@ -163,9 +163,9 @@ public class CurrentUserProvider {
         checkAuthRequest.get(authStr, new CheckAuthRequestModel(getId(), getToken()).toMap())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .onErrorReturn(new Function<Throwable, Response<CheckAuth>>() {
+                .onErrorReturn(new Function<Throwable, Response<CheckAuthModel>>() {
                     @Override
-                    public Response<CheckAuth> apply(@NonNull Throwable throwable) throws Exception {
+                    public Response<CheckAuthModel> apply(@NonNull Throwable throwable) throws Exception {
                         handler.onRequestFailure(throwable);
                         return null;
                     }

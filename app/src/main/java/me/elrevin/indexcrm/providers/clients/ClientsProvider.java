@@ -1,4 +1,4 @@
-package me.elrevin.indexcrm.providers.tasks;
+package me.elrevin.indexcrm.providers.clients;
 
 import javax.inject.Inject;
 
@@ -7,24 +7,23 @@ import io.reactivex.schedulers.Schedulers;
 import me.elrevin.indexcrm.CustomApp;
 import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 import me.elrevin.indexcrm.rest.api.ApiMethods;
-import me.elrevin.indexcrm.rest.api.GetTasksListRequest;
-import me.elrevin.indexcrm.rest.models.GetTasksListRequestModel;
+import me.elrevin.indexcrm.rest.api.GetClientsListRequest;
+import me.elrevin.indexcrm.rest.models.GetClientsListRequestModel;
 
-public class TasksProvider {
-
+public class ClientsProvider {
     @Inject
     CurrentUserProvider currentUserProvider;
 
     @Inject
-    GetTasksListRequest getTasksListRequest;
+    GetClientsListRequest getClientsListRequest;
 
-    public TasksProvider() {
+    public ClientsProvider() {
         CustomApp.getApplicationComponent().inject(this);
     }
 
-    public void loadList(int limit, final LoadTasksListHandler handler) {
+    public void loadList(int limit, LoadClientsListHandler handler) {
         String auth = ApiMethods.getBasicAuthString(currentUserProvider.getLogin(), currentUserProvider.getPassword());
-        getTasksListRequest.get(auth, new GetTasksListRequestModel(Integer.toString(limit)).toMap())
+        getClientsListRequest.get(auth, new GetClientsListRequestModel(Integer.toString(limit)).toMap())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorReturn((t) -> {
@@ -43,7 +42,6 @@ public class TasksProvider {
                             }
                         }
                     }
-
                     if (response.code() == 401) {
                         handler.onAuthFailure();
                         return;

@@ -3,11 +3,8 @@ package me.elrevin.indexcrm.mvp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Task {
+public class TaskModel extends BaseListItemModel {
 
-    @SerializedName("id")
-    @Expose
-    private String id;
     @SerializedName("type")
     @Expose
     private String type;
@@ -65,14 +62,6 @@ public class Task {
     @SerializedName("tm")
     @Expose
     private Integer tm;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getType() {
         return type;

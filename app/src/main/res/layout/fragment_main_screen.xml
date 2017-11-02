@@ -2,114 +2,145 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.elrevin.indexcrm.ui.fragment.MainScreenFragment"
-    >
+    tools:context="me.elrevin.indexcrm.ui.fragment.MainScreenFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cvTasksList"
-            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardElevation = "3dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="8dp"
+            card_view:cardElevation="3dp"
             >
-            <RelativeLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:orientation="vertical"
+                android:padding="24dp"
                 >
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_tasks"
-                    android:id="@+id/ivTasksIcon"
-                    android:layout_marginRight="24dp"
-                    />
-                <TextView
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivTasksIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="24dp"
+                        android:src="@drawable/ic_tasks" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/ivTasksIcon"
+                        android:text="Задачи"
+                        android:textSize="15sp"
+                        android:textStyle="bold"/>
+                </RelativeLayout>
+
+                <me.elrevin.indexcrm.common.CustomListView
+                    android:id="@+id/lvTasks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text = "Задачи"
-                    android:layout_toRightOf="@id/ivTasksIcon"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    >
-
-                </TextView>
-            </RelativeLayout>
+                    android:layout_marginTop="16dp"
+                    />
+            </LinearLayout>
         </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cvClientsList"
-            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardElevation = "3dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="8dp"
+            card_view:cardElevation="3dp"
             >
-            <RelativeLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                >
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_clients"
-                    android:id="@+id/ivClientsIcon"
-                    android:layout_marginRight="24dp"
-                    />
-                <TextView
+                android:orientation="vertical"
+                android:padding="24dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivClientsIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="24dp"
+                        android:src="@drawable/ic_clients" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/ivClientsIcon"
+                        android:text="Клиенты"
+                        android:textSize="15sp"
+                        android:textStyle="bold">
+
+                    </TextView>
+                </RelativeLayout>
+                <me.elrevin.indexcrm.common.CustomListView
+                    android:id="@+id/lvClients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text = "Клиенты"
-                    android:layout_toRightOf="@id/ivClientsIcon"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    >
-
-                </TextView>
-            </RelativeLayout>
+                    android:layout_marginTop="16dp"
+                    />
+            </LinearLayout>
         </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cvNewsList"
-            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardElevation = "3dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="8dp"
+            card_view:cardElevation="3dp"
             >
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                >
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_news"
-                    android:id="@+id/ivNewsIcon"
-                    android:layout_marginRight="24dp"
-                    />
-                <TextView
+                android:orientation="vertical"
+                android:padding="24dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivNewsIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="24dp"
+                        android:src="@drawable/ic_news" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/ivNewsIcon"
+                        android:text="Новости"
+                        android:textSize="15sp"
+                        android:textStyle="bold">
+
+                    </TextView>
+                </RelativeLayout>
+                <me.elrevin.indexcrm.common.CustomListView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text = "Новости"
-                    android:layout_toRightOf="@id/ivNewsIcon"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    >
+                    android:id="@+id/lvNews"
+                    android:layout_marginTop="16dp"
+                    />
 
-                </TextView>
-            </RelativeLayout>
+            </LinearLayout>
+
         </android.support.v7.widget.CardView>
     </LinearLayout>
 </ScrollView>

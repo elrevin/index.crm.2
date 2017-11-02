@@ -8,6 +8,8 @@ import me.elrevin.indexcrm.rest.RestClient;
 import me.elrevin.indexcrm.rest.api.CheckAuthRequest;
 import me.elrevin.indexcrm.rest.api.CheckCommonLoginAndPasswordRequest;
 import me.elrevin.indexcrm.rest.api.CheckPersonalLoginAndPasswordRequest;
+import me.elrevin.indexcrm.rest.api.GetClientsListRequest;
+import me.elrevin.indexcrm.rest.api.GetNewstListRequest;
 import me.elrevin.indexcrm.rest.api.GetTasksListRequest;
 
 @Module
@@ -48,5 +50,17 @@ public class RestModule {
     @Singleton
     public GetTasksListRequest provideGetTasksListRequest() {
         return restClient.createService(GetTasksListRequest.class);
+    }
+
+    @Provides
+    @Singleton
+    public GetClientsListRequest provideGetClientsListRequest() {
+        return restClient.createService(GetClientsListRequest.class);
+    }
+
+    @Provides
+    @Singleton
+    public GetNewstListRequest provideGetNewstListRequest() {
+        return restClient.createService(GetNewstListRequest.class);
     }
 }

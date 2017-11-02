@@ -7,6 +7,8 @@ public class ApiMethods {
     public static final String CHECK_PERSONAL_LOGIN_AND_PASSWORD = "api.php?module=users&method=createTokenByLogin";
     public static final String CHECK_AUTH = "api.php?module=users&method=auth";
     public static final String GET_TASKS_LIST = "api.php?module=tasks&method=getList";
+    public static final String GET_CLIENTS_LIST = "api.php?module=clients&method=getList";
+    public static final String GET_NEWS_LIST = "api.php?module=news&method=getList";
 
     public static final String getBasicAuthString(String login, String password) {
         return "Basic " + Base64.encodeToString(String.format("%s:%s", login, password).getBytes(), Base64.NO_WRAP);

@@ -37,6 +37,10 @@ public abstract class BaseRequestModel {
             map.put("token", token);
         }
 
+        if (userId != null) {
+            map.put("user_id", userId);
+        }
+
         onMapCreate(map);
 
         return map;

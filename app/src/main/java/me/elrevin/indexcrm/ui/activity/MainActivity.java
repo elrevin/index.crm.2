@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void login() {
+
         Intent intent = new Intent(this, LoginActivity.class);
         startActivityForResult(intent, Constants.REQUEST_CODE_LOGIN);
     }

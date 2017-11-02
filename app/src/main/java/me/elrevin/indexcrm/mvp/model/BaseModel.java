@@ -3,7 +3,7 @@ package me.elrevin.indexcrm.mvp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Base {
+public class BaseModel {
 
     @SerializedName("status")
     @Expose
