@@ -27,7 +27,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected int getMainContentLayout() {
-        return R.layout.activity_login;
+        return 0;
     }
 
     public void onFragmentData(int type, Intent intent) {

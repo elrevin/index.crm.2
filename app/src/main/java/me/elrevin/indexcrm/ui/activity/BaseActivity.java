@@ -31,10 +31,12 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (haveToolbar()) {
-            setContentView(R.layout.activity_base_w_toolbar);
-        } else {
-            setContentView(R.layout.activity_base_wo_toolbar);
+        if (getMainContentLayout() == 0) {
+            if (haveToolbar()) {
+                setContentView(R.layout.activity_base_w_toolbar);
+            } else {
+                setContentView(R.layout.activity_base_wo_toolbar);
+            }
         }
 
         CustomApp.getApplicationComponent().inject(this);
