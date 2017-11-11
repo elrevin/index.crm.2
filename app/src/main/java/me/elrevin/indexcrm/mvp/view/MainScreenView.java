@@ -14,4 +14,6 @@ public interface MainScreenView extends MvpView {
     void onNewsLoaded(List<NewsModel> list);
     void onRequestFailure(Throwable t);
     void onAuthFailure();
+
+    void openClientsScreen();
 }

@@ -7,7 +7,6 @@ import android.widget.Toast;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import me.elrevin.indexcrm.Constants;
-import me.elrevin.indexcrm.R;
 import me.elrevin.indexcrm.mvp.presenter.MainPresenter;
 import me.elrevin.indexcrm.mvp.view.MainView;
 import me.elrevin.indexcrm.ui.fragment.MainScreenFragment;

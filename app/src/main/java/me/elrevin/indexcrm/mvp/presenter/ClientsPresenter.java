@@ -1,5 +1,6 @@
 package me.elrevin.indexcrm.mvp.presenter;
 
+import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import me.elrevin.indexcrm.providers.clients.ClientsProvider;
 import me.elrevin.indexcrm.providers.clients.LoadClientsListHandler;
 import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 
+@InjectViewState
 public class ClientsPresenter extends MvpPresenter<ClientsView> {
     @Inject
     CurrentUserProvider currentUserProvider;

@@ -1,18 +1,28 @@
 package me.elrevin.indexcrm.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import me.elrevin.indexcrm.R;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+
+import me.elrevin.indexcrm.mvp.presenter.ClientsPresenter;
 import me.elrevin.indexcrm.mvp.view.ClientsView;
+import me.elrevin.indexcrm.ui.fragment.ClientsListFragment;
 
 public class ClientsActivity extends BaseActivity implements ClientsView {
 
     @Override
+    protected boolean haveToolbar() {
+        return true;
+    }
+
+    @InjectPresenter
+    public ClientsPresenter presenter;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clients);
+        presenter.showClientsList();
     }
 
     @Override
@@ -22,6 +32,6 @@ public class ClientsActivity extends BaseActivity implements ClientsView {
 
     @Override
     public void showClientsList() {
-
+        setContent(new ClientsListFragment());
     }
 }

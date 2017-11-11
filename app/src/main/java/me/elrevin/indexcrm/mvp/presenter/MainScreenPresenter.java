@@ -90,4 +90,8 @@ public class MainScreenPresenter extends MvpPresenter <MainScreenView> {
             }
         });
     }
+
+    public void openClientsScreen() {
+        getViewState().openClientsScreen();
+    }
 }

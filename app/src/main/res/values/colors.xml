@@ -9,4 +9,6 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorAlert">#FF4200</color>
     <color name="colorGreen">#88A80D</color>
+
+    <color name="colorTransparent">#00ffffff</color>
 </resources>

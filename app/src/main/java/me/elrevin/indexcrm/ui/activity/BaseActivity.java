@@ -3,7 +3,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 
@@ -40,9 +39,6 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
         }
 
         CustomApp.getApplicationComponent().inject(this);
-
-        FrameLayout parent = (FrameLayout) findViewById(R.id.wrapper);
-        getLayoutInflater().inflate(getMainContentLayout(), parent);
 
         ButterKnife.bind(this);
     }
@@ -86,5 +82,10 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
     }
 
     public void onFragmentData(int type, Intent intent) {
+    }
+
+    public void startActivity(Class<?> cls) {
+        Intent intent = new Intent(this, cls);
+        startActivity(intent);
     }
 }
