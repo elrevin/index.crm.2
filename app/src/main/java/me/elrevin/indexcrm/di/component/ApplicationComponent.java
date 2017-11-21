@@ -3,6 +3,7 @@ package me.elrevin.indexcrm.di.component;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import me.elrevin.indexcrm.mvp.presenter.ClientsListPresenter;
 import me.elrevin.indexcrm.mvp.presenter.ClientsPresenter;
 import me.elrevin.indexcrm.mvp.presenter.MainScreenPresenter;
 import me.elrevin.indexcrm.providers.clients.ClientsProvider;
@@ -36,6 +37,7 @@ public interface ApplicationComponent {
     void inject(MainPresenter presenter);
     void inject(MainScreenPresenter presenter);
     void inject(ClientsPresenter presenter);
+    void inject(ClientsListPresenter presenter);
 
     // Providers
     void inject(CurrentUserProvider currentUserProvider);

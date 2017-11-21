@@ -4,22 +4,42 @@ package me.elrevin.indexcrm.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+
+import java.util.List;
+
 import butterknife.BindView;
 import me.elrevin.indexcrm.R;
+import me.elrevin.indexcrm.common.adapters.ClientsRecyclerAdapter;
+import me.elrevin.indexcrm.mvp.model.ClientModel;
+import me.elrevin.indexcrm.mvp.presenter.ClientsListPresenter;
+import me.elrevin.indexcrm.mvp.view.ClientsListView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ClientsListFragment extends BaseFragment {
+public class ClientsListFragment extends BaseFragment implements ClientsListView {
 
     @BindView(R.id.svSearchClients)
     SearchView searchView;
+
+    @BindView(R.id.rvClientsList)
+    RecyclerView rvClientsList;
+
+    ClientsRecyclerAdapter clientsListAdapter;
+
+    LinearLayoutManager rvClientsListLayoutManager;
+
+    @InjectPresenter
+    ClientsListPresenter presenter;
 
     public ClientsListFragment() {
         // Required empty public constructor
@@ -63,10 +83,17 @@ public class ClientsListFragment extends BaseFragment {
                 return onCloseSearchListener();
             }
         });
+
+        clientsListAdapter = new ClientsRecyclerAdapter();
+        rvClientsList.setAdapter(clientsListAdapter);
+        rvClientsListLayoutManager = new LinearLayoutManager(getBaseActivity());
+        rvClientsList.setLayoutManager(rvClientsListLayoutManager);
+
+        presenter.loadClients();
     }
 
     public boolean onSearchSubmitListener(String text) {
-        Toast.makeText(getBaseActivity(), text, Toast.LENGTH_LONG).show();
+        presenter.loadClients(text);
         return true;
     }
 
@@ -77,5 +104,21 @@ public class ClientsListFragment extends BaseFragment {
 
     public boolean onSearchTextChangeListener(String text) {
         return false;
+    }
+
+    @Override
+    public void onClientsLoaded(List<ClientModel> list) {
+        clientsListAdapter.clearList();
+        clientsListAdapter.addAll(list, true);
+    }
+
+    @Override
+    public void onRequestFailure(Throwable t) {
+        Toast.makeText(getBaseActivity(), "Проблемы с сетью", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onAuthFailure() {
+
     }
 }

@@ -21,9 +21,17 @@ public class ClientsProvider {
         CustomApp.getApplicationComponent().inject(this);
     }
 
-    public void loadList(int limit, LoadClientsListHandler handler) {
+    protected void pLoadList(int limit, String name,  LoadClientsListHandler handler) {
+        GetClientsListRequestModel requestModel;
+
+        if (name.isEmpty()) {
+            requestModel = new GetClientsListRequestModel(Integer.toString(limit));
+        } else {
+            requestModel = new GetClientsListRequestModel(Integer.toString(limit), name);
+        }
+
         String auth = ApiMethods.getBasicAuthString(currentUserProvider.getLogin(), currentUserProvider.getPassword());
-        getClientsListRequest.get(auth, new GetClientsListRequestModel(Integer.toString(limit)).toMap())
+        getClientsListRequest.get(auth, requestModel.toMap())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorReturn((t) -> {
@@ -49,4 +57,13 @@ public class ClientsProvider {
                     handler.onRequestFailure(new Throwable("Проблемы с сетью. TasksProvider.loadList"));
                 });
     }
+
+    public void loadList(int limit, LoadClientsListHandler handler) {
+        pLoadList(limit, "", handler);
+    }
+
+    public void loadList(int limit, String name,  LoadClientsListHandler handler) {
+        pLoadList(limit, name, handler);
+    }
 }
+
