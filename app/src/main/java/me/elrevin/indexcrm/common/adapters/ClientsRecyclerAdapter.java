@@ -32,15 +32,9 @@ public class ClientsRecyclerAdapter extends RecyclerView.Adapter<ClientsRecycler
     public void onBindViewHolder(ViewHolder holder, int position) {
         ClientModel item = list.get(position);
 
-        if (item.getPhone().isEmpty()) {
-            holder.phone.setVisibility(View.GONE);
-        } else {
-            holder.phone.setText(item.getPhone());
-        }
-
         holder.name.setText(item.getName());
 
-        if (item.getServices().isEmpty()) {
+        if (item.getServices() == null || item.getServices().isEmpty()) {
             holder.services.setVisibility(View.GONE);
         } else {
             ArrayList<String> services = new ArrayList<>();
@@ -78,12 +72,14 @@ public class ClientsRecyclerAdapter extends RecyclerView.Adapter<ClientsRecycler
             }
 
             holder.services.setText(TextUtils.join(", ", services));
+            holder.services.setVisibility(View.VISIBLE);
         }
 
-        if (item.getLastContactDate().isEmpty()) {
+        if (item.getLastContactDate() == null || item.getLastContactDate().isEmpty()) {
             holder.lastContactDate.setVisibility(View.GONE);
         } else {
             holder.lastContactDate.setText(item.getLastContactDate());
+            holder.lastContactDate.setVisibility(View.VISIBLE);
         }
     }
 
@@ -124,16 +120,12 @@ public class ClientsRecyclerAdapter extends RecyclerView.Adapter<ClientsRecycler
         TextView name;
         TextView services;
         TextView lastContactDate;
-        Button phone;
         ViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cvClientItem);
             name = (TextView)itemView.findViewById(R.id.tvClientName);
             services = (TextView)itemView.findViewById(R.id.tvClientServices);
-            lastContactDate = (TextView)itemView.findViewById(R.id.tvLastContactDate);
-            phone = (Button) itemView.findViewById(R.id.btnClientPhone);
-
-
+            lastContactDate = (TextView)itemView.findViewById(R.id.tvClientLastContactDate);
         }
     }
 }

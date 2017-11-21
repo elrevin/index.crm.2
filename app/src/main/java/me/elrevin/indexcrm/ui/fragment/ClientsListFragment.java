@@ -23,9 +23,6 @@ import me.elrevin.indexcrm.mvp.model.ClientModel;
 import me.elrevin.indexcrm.mvp.presenter.ClientsListPresenter;
 import me.elrevin.indexcrm.mvp.view.ClientsListView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ClientsListFragment extends BaseFragment implements ClientsListView {
 
     @BindView(R.id.svSearchClients)
