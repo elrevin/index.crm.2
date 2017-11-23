@@ -37,6 +37,7 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
                 setSupportActionBar(toolbar);
                 if (setDisplayHomeAsUpEnabled()) {
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    getSupportActionBar().setDisplayShowHomeEnabled(true);
                 }
             } else {
                 setContentView(R.layout.activity_base_wo_toolbar);
@@ -89,6 +90,12 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
         if (!removeCurrentFragment()) {
             onCloseByBackButton();
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 
     public void onCloseByBackButton() {

@@ -14,12 +14,15 @@ import java.util.List;
 
 import me.elrevin.indexcrm.R;
 import me.elrevin.indexcrm.mvp.model.ClientModel;
+import me.elrevin.indexcrm.ui.fragment.ClientsListFragment;
 
 public class ClientsRecyclerAdapter extends RecyclerView.Adapter<ClientsRecyclerAdapter.ViewHolder> {
     private ArrayList<ClientModel> list;
+    private ClientsListFragment fragment;
 
-    public ClientsRecyclerAdapter() {
+    public ClientsRecyclerAdapter(ClientsListFragment fragment) {
         this.list = new ArrayList<>();
+        this.fragment = fragment;
     }
 
     @Override
@@ -31,56 +34,13 @@ public class ClientsRecyclerAdapter extends RecyclerView.Adapter<ClientsRecycler
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ClientModel item = list.get(position);
-
-        holder.name.setText(item.getName());
-
-        if (item.getServices() == null || item.getServices().isEmpty()) {
-            holder.services.setVisibility(View.GONE);
-        } else {
-            ArrayList<String> services = new ArrayList<>();
-
-            for (String si : item.getServices()) {
-                switch (si) {
-                    case "DEV":
-                        services.add("Р");
-                        break;
-                    case "SUP":
-                        services.add("С");
-                        break;
-                    case "SEO_POSITIONS":
-                        services.add("ПП");
-                        break;
-                    case "SEO_TRAFFIC":
-                        services.add("ПТ");
-                        break;
-                    case "SMM":
-                        services.add("SMM");
-                        break;
-                    case "START":
-                        services.add("IS");
-                        break;
-                    case "CONTEXT_MANAGEMENT":
-                        services.add("КВ");
-                        break;
-                    case "CONTEXT_BUDGET":
-                        services.add("КБ");
-                        break;
-                    default:
-                        services.add("ХЗ");
-                        break;
-                }
+        holder.setClient(item);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment.openClient(item);
             }
-
-            holder.services.setText(TextUtils.join(", ", services));
-            holder.services.setVisibility(View.VISIBLE);
-        }
-
-        if (item.getLastContactDate() == null || item.getLastContactDate().isEmpty()) {
-            holder.lastContactDate.setVisibility(View.GONE);
-        } else {
-            holder.lastContactDate.setText(item.getLastContactDate());
-            holder.lastContactDate.setVisibility(View.VISIBLE);
-        }
+        });
     }
 
     @Override
@@ -120,12 +80,66 @@ public class ClientsRecyclerAdapter extends RecyclerView.Adapter<ClientsRecycler
         TextView name;
         TextView services;
         TextView lastContactDate;
+        ClientModel item;
         ViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cvClientItem);
             name = (TextView)itemView.findViewById(R.id.tvClientName);
             services = (TextView)itemView.findViewById(R.id.tvClientServices);
             lastContactDate = (TextView)itemView.findViewById(R.id.tvClientLastContactDate);
+        }
+
+        public void setClient(ClientModel client) {
+            item = client;
+            name.setText(item.getName());
+
+            if (item.getServices() == null || item.getServices().isEmpty()) {
+                services.setVisibility(View.GONE);
+            } else {
+                ArrayList<String> services = new ArrayList<>();
+
+                for (String si : item.getServices()) {
+                    switch (si) {
+                        case "DEV":
+                            services.add("Р");
+                            break;
+                        case "SUP":
+                            services.add("С");
+                            break;
+                        case "SEO_POSITIONS":
+                            services.add("ПП");
+                            break;
+                        case "SEO_TRAFFIC":
+                            services.add("ПТ");
+                            break;
+                        case "SMM":
+                            services.add("SMM");
+                            break;
+                        case "START":
+                            services.add("IS");
+                            break;
+                        case "CONTEXT_MANAGEMENT":
+                            services.add("КВ");
+                            break;
+                        case "CONTEXT_BUDGET":
+                            services.add("КБ");
+                            break;
+                        default:
+                            services.add("ХЗ");
+                            break;
+                    }
+                }
+
+                this.services.setText(TextUtils.join(", ", services));
+                this.services.setVisibility(View.VISIBLE);
+            }
+
+            if (item.getLastContactDate() == null || item.getLastContactDate().isEmpty()) {
+                lastContactDate.setVisibility(View.GONE);
+            } else {
+                lastContactDate.setText(item.getLastContactDate());
+                lastContactDate.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

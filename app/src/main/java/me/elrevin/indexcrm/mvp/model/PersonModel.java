@@ -9,7 +9,7 @@ public class PersonModel extends BaseListItemModel {
     private String name;
     @SerializedName("position")
     @Expose
-    private Object position;
+    private String position;
     @SerializedName("phone")
     @Expose
     private String phone;
@@ -22,11 +22,11 @@ public class PersonModel extends BaseListItemModel {
         this.name = name;
     }
 
-    public Object getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(Object position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 

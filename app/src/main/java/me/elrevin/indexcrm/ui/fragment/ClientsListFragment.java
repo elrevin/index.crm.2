@@ -22,6 +22,7 @@ import me.elrevin.indexcrm.common.adapters.ClientsRecyclerAdapter;
 import me.elrevin.indexcrm.mvp.model.ClientModel;
 import me.elrevin.indexcrm.mvp.presenter.ClientsListPresenter;
 import me.elrevin.indexcrm.mvp.view.ClientsListView;
+import me.elrevin.indexcrm.ui.activity.ClientsActivity;
 
 public class ClientsListFragment extends BaseFragment implements ClientsListView {
 
@@ -81,7 +82,7 @@ public class ClientsListFragment extends BaseFragment implements ClientsListView
             }
         });
 
-        clientsListAdapter = new ClientsRecyclerAdapter();
+        clientsListAdapter = new ClientsRecyclerAdapter(this);
         rvClientsList.setAdapter(clientsListAdapter);
         rvClientsListLayoutManager = new LinearLayoutManager(getBaseActivity());
         rvClientsList.setLayoutManager(rvClientsListLayoutManager);
@@ -117,5 +118,9 @@ public class ClientsListFragment extends BaseFragment implements ClientsListView
     @Override
     public void onAuthFailure() {
 
+    }
+
+    public void openClient(ClientModel client) {
+        ((ClientsActivity) getBaseActivity()).openClient(client);
     }
 }

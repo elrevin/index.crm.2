@@ -5,8 +5,10 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
+import me.elrevin.indexcrm.mvp.model.ClientModel;
 import me.elrevin.indexcrm.mvp.presenter.ClientsPresenter;
 import me.elrevin.indexcrm.mvp.view.ClientsView;
+import me.elrevin.indexcrm.ui.fragment.ClientItemFragment;
 import me.elrevin.indexcrm.ui.fragment.ClientsListFragment;
 
 public class ClientsActivity extends BaseActivity implements ClientsView {
@@ -41,8 +43,25 @@ public class ClientsActivity extends BaseActivity implements ClientsView {
         finish();
     }
 
+//    @Override
+//    public void onBackPressed() {
+//        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+//            getSupportFragmentManager().popBackStack();
+//            super.onBackPressed();
+//        } else {
+//            //startActivity(new Intent(this, MainActivity.class));
+//            finish();
+//        }
+//    }
+
     @Override
     public boolean setDisplayHomeAsUpEnabled() {
         return true;
+    }
+
+    public void openClient(ClientModel client) {
+        ClientItemFragment fragment = new ClientItemFragment();
+        fragment.setClient(client);
+        addContent(fragment);
     }
 }

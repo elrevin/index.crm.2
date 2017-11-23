@@ -28,7 +28,7 @@ public class ClientModel extends BaseListItemModel {
     private java.util.List<String> services = null;
     @SerializedName("persons")
     @Expose
-    private java.util.List<PersonModel> personModels = null;
+    private java.util.List<PersonModel> persons = null;
 
     public String getName() {
         return name;
@@ -86,10 +86,10 @@ public class ClientModel extends BaseListItemModel {
         this.services = services;
     }
 
-    public java.util.List<PersonModel> getPersonModels() {
-        return personModels;
+    public java.util.List<PersonModel> getPersons() {
+        return persons;
     }
 
-    public void setPersonModels(java.util.List<PersonModel> personModels) {
-        this.personModels = personModels;
+    public void setPersons(java.util.List<PersonModel> persons) {
+        this.persons = persons;
     }}
