@@ -57,7 +57,7 @@ public class ClientsListFragment extends BaseFragment implements ClientsListView
 
     @Override
     public String onCreateToolbarTitle() {
-        return null;
+        return "Клиенты";
     }
 
     @Override

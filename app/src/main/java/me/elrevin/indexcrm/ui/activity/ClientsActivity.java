@@ -34,4 +34,15 @@ public class ClientsActivity extends BaseActivity implements ClientsView {
     public void showClientsList() {
         setContent(new ClientsListFragment());
     }
+
+    @Override
+    public void onCloseByBackButton() {
+        super.onCloseByBackButton();
+        finish();
+    }
+
+    @Override
+    public boolean setDisplayHomeAsUpEnabled() {
+        return true;
+    }
 }

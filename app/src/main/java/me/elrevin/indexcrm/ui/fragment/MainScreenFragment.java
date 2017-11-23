@@ -96,7 +96,7 @@ public class MainScreenFragment extends BaseFragment implements MainScreenView {
 
     @Override
     public String onCreateToolbarTitle() {
-        return null;
+        return "index.crm";
     }
 
 

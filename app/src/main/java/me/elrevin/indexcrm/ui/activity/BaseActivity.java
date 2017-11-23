@@ -2,7 +2,7 @@ package me.elrevin.indexcrm.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.widget.FrameLayout;
+import android.support.v7.widget.Toolbar;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 
@@ -33,6 +33,11 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
         if (getMainContentLayout() == 0) {
             if (haveToolbar()) {
                 setContentView(R.layout.activity_base_w_toolbar);
+                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+                setSupportActionBar(toolbar);
+                if (setDisplayHomeAsUpEnabled()) {
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                }
             } else {
                 setContentView(R.layout.activity_base_wo_toolbar);
             }
@@ -47,6 +52,9 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
     @LayoutRes
     protected abstract int getMainContentLayout();
 
+    public boolean setDisplayHomeAsUpEnabled() {
+        return false;
+    }
 
     public void fragmentOnScreen(BaseFragment baseFragment) {
         setToolbarTitle(baseFragment.createToolbarTitle());
@@ -78,7 +86,13 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        removeCurrentFragment();
+        if (!removeCurrentFragment()) {
+            onCloseByBackButton();
+        }
+    }
+
+    public void onCloseByBackButton() {
+
     }
 
     public void onFragmentData(int type, Intent intent) {
