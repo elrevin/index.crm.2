@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import me.elrevin.indexcrm.R;
 import me.elrevin.indexcrm.mvp.model.PersonModel;
+import me.elrevin.indexcrm.ui.activity.BaseActivity;
 
 public class PersonsRecyclerAdapter extends RecyclerView.Adapter<PersonsRecyclerAdapter.ViewHolder> {
 
@@ -69,11 +70,7 @@ public class PersonsRecyclerAdapter extends RecyclerView.Adapter<PersonsRecycler
             call.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + person.getPhone()));
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-                    getContext().startActivity(intent);
+                    ((BaseActivity) context).phoneCall(person.getPhone());
                 }
             });
         }
@@ -91,7 +88,6 @@ public class PersonsRecyclerAdapter extends RecyclerView.Adapter<PersonsRecycler
             if (
                     person.getPhone() != null
                     && !person.getPhone().isEmpty()
-                    && ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) || Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
                 ) {
                 callContainer.setVisibility(View.VISIBLE);
             } else {

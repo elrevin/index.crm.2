@@ -10,23 +10,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="15dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         >
-        <TextView
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/llNameContainer"
+            android:paddingRight="32dp"
+            android:layout_marginRight="8dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Название"
+                android:textSize="10sp"
+                android:layout_marginBottom="3dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="Клиент чудесный"
+                android:id="@+id/tvClientName"
+                />
+        </LinearLayout>
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Название"
-            android:textSize="10sp"
-            android:layout_marginBottom="3dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:text="Клиент чудесный"
-            android:id="@+id/tvClientName"
+            android:src="@drawable/ic_edit"
+            android:layout_toRightOf="@id/llNameContainer"
+            android:background="@color/colorWhite"
             />
     </LinearLayout>
 
@@ -34,8 +54,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="15dp"
         android:id="@+id/llClientServices"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -57,7 +79,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginBottom="15dp"
         android:id="@+id/llPersons"
         >
         <TextView
@@ -66,6 +87,8 @@
             android:text="Персоны"
             android:textSize="10sp"
             android:layout_marginBottom="3dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             />
         <ScrollView
             android:layout_width="match_parent"
@@ -74,6 +97,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/rvPersons"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 />
         </ScrollView>
     </LinearLayout>

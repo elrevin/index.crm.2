@@ -1,7 +1,13 @@
 package me.elrevin.indexcrm.ui.activity;
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -18,6 +24,10 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
 
     public static final int SET_AUTH_STEP = 1;
     public static final int AUTH_SUCCESSFUL = 2;
+
+    public static final int REQUEST_PHONE_CALL = 1;
+
+    protected String callPhoneNumber;
 
     @Inject
     public FragmentManager fragmentManager;
@@ -108,5 +118,36 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
     public void startActivity(Class<?> cls) {
         Intent intent = new Intent(this, cls);
         startActivity(intent);
+    }
+
+    private void doPhoneCall(boolean request) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            if (request) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CALL_PHONE},
+                        REQUEST_PHONE_CALL);
+            }
+        } else {
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + callPhoneNumber));
+            this.startActivity(intent);
+        }
+    }
+
+    public void phoneCall(String num) {
+        callPhoneNumber = num;
+        doPhoneCall(true);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_PHONE_CALL : {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    doPhoneCall(false);
+                }
+            }
+        }
     }
 }
