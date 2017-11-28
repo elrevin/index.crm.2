@@ -59,7 +59,6 @@ public class ApplicationModule {
     }
 
     @Provides
-    @Singleton
     public FragmentManager provideFragmentManager(){
         return new FragmentManager();
     }

@@ -3,7 +3,9 @@ package me.elrevin.indexcrm.mvp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BaseListItemModel {
+import java.io.Serializable;
+
+public class BaseListItemModel implements Serializable {
     @SerializedName("id")
     @Expose
     private String id;

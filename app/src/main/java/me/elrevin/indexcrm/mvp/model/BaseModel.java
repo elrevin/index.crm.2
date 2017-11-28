@@ -3,7 +3,9 @@ package me.elrevin.indexcrm.mvp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BaseModel {
+import java.io.Serializable;
+
+public class BaseModel implements Serializable {
 
     @SerializedName("status")
     @Expose

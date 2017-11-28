@@ -1,5 +1,6 @@
 package me.elrevin.indexcrm.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -24,7 +25,14 @@ public class ClientsActivity extends BaseActivity implements ClientsView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter.showClientsList();
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("CLIENT_ITEM")) {
+            ClientModel item = (ClientModel) intent.getSerializableExtra("CLIENT_ITEM");
+            openClient(item);
+        } else {
+            presenter.showClientsList();
+        }
     }
 
     @Override
@@ -42,17 +50,6 @@ public class ClientsActivity extends BaseActivity implements ClientsView {
         super.onCloseByBackButton();
         finish();
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-//            getSupportFragmentManager().popBackStack();
-//            super.onBackPressed();
-//        } else {
-//            //startActivity(new Intent(this, MainActivity.class));
-//            finish();
-//        }
-//    }
 
     @Override
     public boolean setDisplayHomeAsUpEnabled() {

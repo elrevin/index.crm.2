@@ -1,11 +1,13 @@
 package me.elrevin.indexcrm.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -87,6 +89,12 @@ public class MainScreenFragment extends BaseFragment implements MainScreenView {
         clientsListAdapter = new ClientsListAdapter(clientsList, getBaseActivity());
         lvClients.setAdapter(clientsListAdapter);
         presenter.loadClients();
+        lvClients.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                openClientItem((ClientModel) clientsListAdapter.getItem(position));
+            }
+        });
 
         newsList = new ArrayList<>();
         newsListAdapter = new NewsListAdapter(newsList, getBaseActivity());
@@ -139,5 +147,11 @@ public class MainScreenFragment extends BaseFragment implements MainScreenView {
     @Override
     public void openClientsScreen() {
         getBaseActivity().startActivity(ClientsActivity.class);
+    }
+
+    public void openClientItem(ClientModel item) {
+        Intent intent = new Intent(getBaseActivity(), ClientsActivity.class);
+        intent.putExtra("CLIENT_ITEM", item);
+        startActivity(intent);
     }
 }
