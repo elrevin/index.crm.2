@@ -73,7 +73,7 @@ public class MainScreenPresenter extends MvpPresenter <MainScreenView> {
     }
 
     public  void loadNews() {
-        newsProvider.loadList(3, 0, new LoadNewsListHandler() {
+        newsProvider.loadList(new LoadNewsListHandler() {
             @Override
             public void onRequestFailure(Throwable t) {
 

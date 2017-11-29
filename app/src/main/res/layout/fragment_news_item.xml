@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="me.elrevin.indexcrm.ui.fragment.NewsItemFragment"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="23.11.2017"
+                android:id="@+id/tvDate"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/colorTextGray"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="Бурмицкий Евгений"
+                android:id="@+id/tvAuthor"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/colorTextGray"
+                />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="sf sdf dsf dsf dsf asdf adsf asdf adsf sdf asdf asdf asdfads"
+            android:textColor="@color/colorTextDark"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/tvTitle"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextDark"
+            android:textSize="12sp"
+            android:id="@+id/tvText"
+            android:text="sfd sdf sdfsdsd fsd fsdf sd fsdf sdf ds fsdfsd f sdfdsf sdf sdf dsf sdfsd fsdfsdf sdfsdf sdfsdfsdfsdfsdfsd f"
+            />
+    </LinearLayout>
+
+</LinearLayout>

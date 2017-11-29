@@ -31,6 +31,7 @@ import me.elrevin.indexcrm.mvp.presenter.MainScreenPresenter;
 import me.elrevin.indexcrm.mvp.view.MainScreenView;
 import me.elrevin.indexcrm.ui.activity.ClientsActivity;
 import me.elrevin.indexcrm.ui.activity.MainActivity;
+import me.elrevin.indexcrm.ui.activity.NewsActivity;
 
 public class MainScreenFragment extends BaseFragment implements MainScreenView {
 
@@ -100,6 +101,12 @@ public class MainScreenFragment extends BaseFragment implements MainScreenView {
         newsListAdapter = new NewsListAdapter(newsList, getBaseActivity());
         lvNews.setAdapter(newsListAdapter);
         presenter.loadNews();
+        lvNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                openNewsItem((NewsModel) newsListAdapter.getItem(position));
+            }
+        });
     }
 
     @Override
@@ -152,6 +159,12 @@ public class MainScreenFragment extends BaseFragment implements MainScreenView {
     public void openClientItem(ClientModel item) {
         Intent intent = new Intent(getBaseActivity(), ClientsActivity.class);
         intent.putExtra("CLIENT_ITEM", item);
+        startActivity(intent);
+    }
+
+    public void openNewsItem(NewsModel item) {
+        Intent intent = new Intent(getBaseActivity(), NewsActivity.class);
+        intent.putExtra("NEWS_ITEM", item);
         startActivity(intent);
     }
 }

@@ -15,8 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activity.MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            >
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,10 +24,11 @@
         </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            />
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".ui.activity.ClientsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity android:name=".ui.activity.NewsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             />
     </application>

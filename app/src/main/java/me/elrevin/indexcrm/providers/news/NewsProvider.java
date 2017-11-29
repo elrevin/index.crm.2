@@ -21,9 +21,9 @@ public class NewsProvider {
         CustomApp.getApplicationComponent().inject(this);
     }
 
-    public void loadList(int limit, int from, final LoadNewsListHandler handler) {
+    public void loadList(final LoadNewsListHandler handler) {
         String auth = ApiMethods.getBasicAuthString(currentUserProvider.getLogin(), currentUserProvider.getPassword());
-        getNewstListRequest.get(auth, new GetNewstListRequestModel(limit, from).toMap())
+        getNewstListRequest.get(auth, new GetNewstListRequestModel().toMap())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorReturn((t) -> {
