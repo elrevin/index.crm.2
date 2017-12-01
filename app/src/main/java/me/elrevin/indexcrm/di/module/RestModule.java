@@ -9,6 +9,7 @@ import me.elrevin.indexcrm.rest.api.CheckAuthRequest;
 import me.elrevin.indexcrm.rest.api.CheckCommonLoginAndPasswordRequest;
 import me.elrevin.indexcrm.rest.api.CheckPersonalLoginAndPasswordRequest;
 import me.elrevin.indexcrm.rest.api.GetClientsListRequest;
+import me.elrevin.indexcrm.rest.api.GetNewsCommentsListRequest;
 import me.elrevin.indexcrm.rest.api.GetNewstListRequest;
 import me.elrevin.indexcrm.rest.api.GetTasksListRequest;
 
@@ -62,5 +63,11 @@ public class RestModule {
     @Singleton
     public GetNewstListRequest provideGetNewstListRequest() {
         return restClient.createService(GetNewstListRequest.class);
+    }
+
+    @Provides
+    @Singleton
+    public GetNewsCommentsListRequest provideGetNewsCommentsListRequest() {
+        return restClient.createService(GetNewsCommentsListRequest.class);
     }
 }

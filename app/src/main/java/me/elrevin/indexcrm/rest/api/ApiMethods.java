@@ -9,6 +9,7 @@ public class ApiMethods {
     public static final String GET_TASKS_LIST = "api.php?module=tasks&method=getList";
     public static final String GET_CLIENTS_LIST = "api.php?module=clients&method=getList";
     public static final String GET_NEWS_LIST = "api.php?module=news&method=getList";
+    public static final String GET_NEWS_COMMENTS_LIST = "api.php?module=news&method=getComments";
 
     public static final String getBasicAuthString(String login, String password) {
         return "Basic " + Base64.encodeToString(String.format("%s:%s", login, password).getBytes(), Base64.NO_WRAP);

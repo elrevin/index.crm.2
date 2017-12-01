@@ -30,4 +30,9 @@ public class NewsActivity extends BaseActivity {
         fragment.setNewsItem(item);
         setContent(fragment);
     }
+
+    @Override
+    protected boolean haveToolbar() {
+        return true;
+    }
 }

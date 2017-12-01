@@ -11,6 +11,7 @@ import me.elrevin.indexcrm.CustomApp;
 import me.elrevin.indexcrm.providers.clients.ClientsProvider;
 import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 import me.elrevin.indexcrm.common.FragmentManager;
+import me.elrevin.indexcrm.providers.news.CommentsProvider;
 import me.elrevin.indexcrm.providers.news.NewsProvider;
 import me.elrevin.indexcrm.providers.tasks.TasksProvider;
 
@@ -56,6 +57,12 @@ public class ApplicationModule {
     @Singleton
     public NewsProvider provideNewsProvider() {
         return new NewsProvider();
+    }
+
+    @Provides
+    @Singleton
+    public CommentsProvider prevideCommentsProvider() {
+        return new CommentsProvider();
     }
 
     @Provides

@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvAutor"
+            android:id="@+id/tvAuthor"
             android:text="HJhj HJhjnbn"
             android:textSize="11sp"
             android:textColor="@color/colorTextGray"

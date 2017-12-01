@@ -1,7 +1,6 @@
 package me.elrevin.indexcrm.common.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -26,7 +25,7 @@ public class NewsListAdapter extends CustomBaseAdapter<NewsModel> {
         NewsModel n = (NewsModel) getItem(position);
 
         TextView tvDate = (TextView) view.findViewById(R.id.tvDate);
-        TextView tvAutor = (TextView) view.findViewById(R.id.tvAutor);
+        TextView tvAutor = (TextView) view.findViewById(R.id.tvAuthor);
         TextView tvTitle = (TextView) view.findViewById(R.id.tvTitle);
         TextView tvShortText = (TextView) view.findViewById(R.id.tvShortText);
 
