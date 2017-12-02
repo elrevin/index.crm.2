@@ -1,5 +1,6 @@
 package me.elrevin.indexcrm.mvp.presenter;
 
+import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import me.elrevin.indexcrm.mvp.view.NewsItemView;
 import me.elrevin.indexcrm.providers.news.CommentsProvider;
 import me.elrevin.indexcrm.providers.news.LoadCommentsListHandler;
 
+@InjectViewState
 public class NewsItemPresenter extends MvpPresenter<NewsItemView> {
     @Inject
     CommentsProvider commentsProvider;

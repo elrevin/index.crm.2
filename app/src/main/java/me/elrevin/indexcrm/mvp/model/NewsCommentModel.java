@@ -53,7 +53,7 @@ public class NewsCommentModel extends BaseListItemModel {
     }
 
     public int getNest() {
-        return Integer.getInteger(nest);
+        return Integer.parseInt(nest);
     }
 
     public void setNest(String nest) {

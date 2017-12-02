@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_alignParentLeft="true"
+            android:layout_marginRight="32dp"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -32,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Иван Иванович Иванов"
+                android:text="Иван Иванович Иванов  gf dfgdfgdf gdfg dfg dfg dfg dfg dfgdfg dfg dfgdfgfg"
                 android:id="@+id/tvPersonName"
                 />
         </LinearLayout>

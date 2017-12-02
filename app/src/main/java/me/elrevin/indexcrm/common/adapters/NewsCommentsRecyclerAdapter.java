@@ -20,6 +20,10 @@ public class NewsCommentsRecyclerAdapter extends RecyclerView.Adapter<NewsCommen
 
     private ArrayList<NewsCommentModel> list;
 
+    public NewsCommentsRecyclerAdapter() {
+        list = new ArrayList<>();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_comment_item_on_news_screen, parent, false);
@@ -82,7 +86,7 @@ public class NewsCommentsRecyclerAdapter extends RecyclerView.Adapter<NewsCommen
         public ViewHolder(View itemView) {
             super(itemView);
 
-            ButterKnife.bind(itemView);
+            ButterKnife.bind(this, itemView);
         }
 
         public void setItem(NewsCommentModel item) {
@@ -92,14 +96,9 @@ public class NewsCommentsRecyclerAdapter extends RecyclerView.Adapter<NewsCommen
             tvText.setText(item.getComment());
 
             int nest = item.getNest() + 1;
-            int margin = 16 * nest;
+            int padding = 32 * nest;
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            params.setMargins(margin, 16, 16, 16);
-            llCommentWrapper.setLayoutParams(params);
+            llCommentWrapper.setPadding(padding, 0, 0, 0);
         }
     }
 }

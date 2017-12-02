@@ -24,9 +24,6 @@ import me.elrevin.indexcrm.mvp.model.NewsModel;
 import me.elrevin.indexcrm.mvp.presenter.NewsItemPresenter;
 import me.elrevin.indexcrm.mvp.view.NewsItemView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class NewsItemFragment extends BaseFragment implements NewsItemView {
 
     private NewsModel newsItem;
@@ -86,13 +83,6 @@ public class NewsItemFragment extends BaseFragment implements NewsItemView {
         if (newsItem != null) {
             presenter.setNewsItem(newsItem);
             presenter.showNews();
-
-            newsCommentsRecyclerAdapter = new NewsCommentsRecyclerAdapter();
-            rvComments.setAdapter(newsCommentsRecyclerAdapter);
-            llmComments = new LinearLayoutManager(getBaseActivity());
-            rvComments.setLayoutManager(llmComments);
-
-            presenter.loadComments();
         }
     }
 
@@ -103,6 +93,13 @@ public class NewsItemFragment extends BaseFragment implements NewsItemView {
         tvAuthor.setText(item.getAutor());
         tvTitle.setText(item.getName());
         tvText.setText(item.getText());
+
+        newsCommentsRecyclerAdapter = new NewsCommentsRecyclerAdapter();
+        rvComments.setAdapter(newsCommentsRecyclerAdapter);
+        llmComments = new LinearLayoutManager(getBaseActivity());
+        rvComments.setLayoutManager(llmComments);
+
+        presenter.loadComments();
     }
 
     @Override
