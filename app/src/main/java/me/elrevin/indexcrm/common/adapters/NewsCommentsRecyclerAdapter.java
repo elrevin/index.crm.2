@@ -15,12 +15,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.elrevin.indexcrm.R;
 import me.elrevin.indexcrm.mvp.model.NewsCommentModel;
+import me.elrevin.indexcrm.ui.fragment.NewsItemFragment;
 
 public class NewsCommentsRecyclerAdapter extends RecyclerView.Adapter<NewsCommentsRecyclerAdapter.ViewHolder> {
 
     private ArrayList<NewsCommentModel> list;
+    private NewsItemFragment fragment;
 
-    public NewsCommentsRecyclerAdapter() {
+    public NewsCommentsRecyclerAdapter(NewsItemFragment fragment) {
+        this.fragment = fragment;
         list = new ArrayList<>();
     }
 
@@ -34,6 +37,12 @@ public class NewsCommentsRecyclerAdapter extends RecyclerView.Adapter<NewsCommen
     public void onBindViewHolder(ViewHolder holder, int position) {
         NewsCommentModel item = list.get(position);
         holder.setItem(item);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment.onCommentClick(item);
+            }
+        });
     }
 
     @Override
@@ -64,6 +73,24 @@ public class NewsCommentsRecyclerAdapter extends RecyclerView.Adapter<NewsCommen
     }
 
 
+    public int getPosition(NewsCommentModel item) {
+        for (int i = 0; i < getItemCount(); i++) {
+            if (list.get(i).getId().equals(item.getId())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int getPosition(String id) {
+        for (int i = 0; i < getItemCount(); i++) {
+            if (list.get(i).getId().equals(id)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.cvNewsCommentItem)
         CardView cv;
@@ -92,13 +119,24 @@ public class NewsCommentsRecyclerAdapter extends RecyclerView.Adapter<NewsCommen
         public void setItem(NewsCommentModel item) {
             tvAuthor.setText(item.getName());
             tvDate.setText(item.getDate());
-            tvRating.setText(item.getRating());
+
+            int raiting = Integer.parseInt(item.getRating() == null ? "0" : item.getRating());
+
+            String raitingStr;
+
+            if (raiting > 0) {
+                raitingStr = "+" + Integer.toString(raiting);
+            } else {
+                raitingStr = Integer.toString(raiting);
+            }
+
+            tvRating.setText(raitingStr);
             tvText.setText(item.getComment());
 
             int nest = item.getNest() + 1;
             int padding = 32 * nest;
 
-            llCommentWrapper.setPadding(padding, 0, 0, 0);
+            llCommentWrapper.setPadding(padding, 0, llCommentWrapper.getPaddingRight(), 0);
         }
     }
 }

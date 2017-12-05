@@ -12,6 +12,7 @@ import me.elrevin.indexcrm.rest.api.GetClientsListRequest;
 import me.elrevin.indexcrm.rest.api.GetNewsCommentsListRequest;
 import me.elrevin.indexcrm.rest.api.GetNewstListRequest;
 import me.elrevin.indexcrm.rest.api.GetTasksListRequest;
+import me.elrevin.indexcrm.rest.api.PutNewsCommentRequset;
 
 @Module
 public class RestModule {
@@ -69,5 +70,11 @@ public class RestModule {
     @Singleton
     public GetNewsCommentsListRequest provideGetNewsCommentsListRequest() {
         return restClient.createService(GetNewsCommentsListRequest.class);
+    }
+
+    @Provides
+    @Singleton
+    public PutNewsCommentRequset providePutNewsCommentRequset() {
+        return restClient.createService(PutNewsCommentRequset.class);
     }
 }

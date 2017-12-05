@@ -1,74 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvNewsCommentItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardElevation="3dp"
     android:layout_marginBottom="8dp"
-    android:id="@+id/cvNewsCommentItem">
-    <LinearLayout
+    card_view:cardElevation="3dp">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:orientation="vertical"
-        android:id="@+id/llCommentWrapper"
         >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Автор"
-                    android:textSize="9sp"
-                    android:layout_marginBottom="2dp"
-                    android:id="@+id/tvAuthor"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginRight="8dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvDate"
-                    android:layout_toRightOf="@id/tvAuthor"
-                    android:text="20.11.2017"
-                    android:textSize="9sp"
-                    android:layout_marginBottom="2dp"
-                    />
-            </RelativeLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="9"
-                android:textSize="9sp"
-                android:layout_marginBottom="2dp"
-                android:id="@+id/tvRating"
-                android:layout_alignParentRight="true"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Рейтинг: "
-                android:textSize="9sp"
-                android:layout_marginBottom="2dp"
-                android:layout_toLeftOf="@+id/tvRating"
-                />
-        </RelativeLayout>
-        <TextView
+        <LinearLayout
+            android:id="@+id/llCommentWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorTextDark"
-            android:textSize="12sp"
-            android:id="@+id/tvText"
-            android:text="sfd sdf sdfsdsd fsd fsdf sd fsdf sdf ds fsdfsd f sdfdsf sdf sdf dsf sdfsd fsdfsdf sdfsdf sdfsdfsdfsdfsdfsd f"
-            />
-    </LinearLayout>
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingRight="88dp"
+            android:orientation="vertical"
+            android:layout_alignParentLeft="true"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true">
+
+                    <TextView
+                        android:id="@+id/tvAuthor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginRight="8dp"
+                        android:text="Автор"
+                        android:textSize="9sp" />
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_toRightOf="@id/tvAuthor"
+                        android:text="20.11.2017"
+                        android:textSize="9sp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="sfd sdf sdfsdsd fsd fsdf sd fsdf sdf ds fsdfsd f sdfdsf sdf sdf dsf sdfsd fsdfsdf sdfsdf sdfsdfsdfsdfsdfsd f"
+                android:textColor="@color/colorTextDark"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            >
+            <TextView
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:id="@+id/tvRating"
+                android:text="+99"
+                />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:text="-"
+                    android:padding="0dp"
+                    android:layout_margin="0dp"
+                    android:textSize="20sp"
+                    android:layout_alignParentLeft="true"
+                    />
+                <Button
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:text="+"
+                    android:padding="0dp"
+                    android:layout_margin="0dp"
+                    android:textSize="20sp"
+                    android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

@@ -46,12 +46,6 @@ public class ClientsActivity extends BaseActivity implements ClientsView {
     }
 
     @Override
-    public void onCloseByBackButton() {
-        super.onCloseByBackButton();
-        finish();
-    }
-
-    @Override
     public boolean setDisplayHomeAsUpEnabled() {
         return true;
     }

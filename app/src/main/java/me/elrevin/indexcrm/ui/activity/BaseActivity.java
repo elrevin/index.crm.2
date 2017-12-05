@@ -109,7 +109,7 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
     }
 
     public void onCloseByBackButton() {
-
+        finish();
     }
 
     public void onFragmentData(int type, Intent intent) {

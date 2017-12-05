@@ -35,4 +35,10 @@ public class NewsActivity extends BaseActivity {
     protected boolean haveToolbar() {
         return true;
     }
+
+    @Override
+    public boolean setDisplayHomeAsUpEnabled() {
+        return true;
+    }
+
 }

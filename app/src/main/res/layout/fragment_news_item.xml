@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_alignParentTop="true"
-        android:paddingBottom="56dp"
+        android:paddingBottom="80dp"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,33 +71,73 @@
             />
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorWhite"
+        android:orientation="vertical"
         >
-        <EditText
-            android:id ="@+id/edtInput"
-            android:layout_width ="match_parent"
-            android:layout_height ="wrap_content"
-            android:inputType="textCapSentences|textMultiLine"
-            android:maxLines ="4"
-            android:maxLength ="2000"
-            android:hint ="Комментарий"
-            android:scrollHorizontally="false"
-            android:background="@color/colorTransparent"
-            android:layout_marginRight="32dp"
-            />
-        <ImageButton
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_send_black_24px"
-            android:background="@color/colorWhite"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:id="@+id/rlReplyContainer"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_reply_black_16px"
+                android:id="@+id/ivReply"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/colorTextLight"
+                android:textSize="11sp"
+                android:text="12.12.2017 Какой-то комментарий очень длинный и нудный sdfsd fsd fsd fsd"
+                android:id="@+id/tvReplyText"
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cancel_black_16px"
+                android:layout_alignParentRight="true"
+                android:background="@color/colorWhite"
+                android:id="@+id/ibCancelReply"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id ="@+id/edtComment"
+                android:layout_width ="match_parent"
+                android:layout_height ="wrap_content"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLines ="4"
+                android:maxLength ="2000"
+                android:hint ="Комментарий"
+                android:scrollHorizontally="false"
+                android:background="@color/colorTransparent"
+                android:layout_marginRight="32dp"
+                />
+            <ImageButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_send_black_24px"
+                android:background="@color/colorWhite"
+                android:id="@+id/btnSend"
 
-            />
-    </RelativeLayout>
+                />
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
