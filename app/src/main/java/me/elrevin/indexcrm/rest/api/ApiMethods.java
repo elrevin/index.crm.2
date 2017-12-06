@@ -11,6 +11,7 @@ public class ApiMethods {
     public static final String GET_NEWS_LIST = "api.php?module=news&method=getList";
     public static final String GET_NEWS_COMMENTS_LIST = "api.php?module=news&method=getComments";
     public static final String PUT_NEWS_COMMENT = "api.php?module=news&method=putComment";
+    public static final String PUT_NEWS_COMMENT_RATE = "api.php?module=news&method=putRate";
 
     public static final String getBasicAuthString(String login, String password) {
         return "Basic " + Base64.encodeToString(String.format("%s:%s", login, password).getBytes(), Base64.NO_WRAP);

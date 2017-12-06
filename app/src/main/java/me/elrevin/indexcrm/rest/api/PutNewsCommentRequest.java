@@ -11,7 +11,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 
-public interface PutNewsCommentRequset {
+public interface PutNewsCommentRequest {
     @FormUrlEncoded
     @POST(ApiMethods.PUT_NEWS_COMMENT)
     Observable<Response<PutNewsCommentModel>> put(@Header("Authorization") String authorization, @QueryMap Map<String, String> params, @FieldMap Map<String, String> fields);

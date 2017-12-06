@@ -20,6 +20,10 @@ public class NewsCommentModel extends BaseListItemModel {
     @Expose
     private String nest;
 
+    @SerializedName("can_rate")
+    @Expose
+    private boolean canRate;
+
     public String getName() {
         return name;
     }
@@ -58,5 +62,13 @@ public class NewsCommentModel extends BaseListItemModel {
 
     public void setNest(String nest) {
         this.nest = nest;
+    }
+
+    public boolean isCanRate() {
+        return canRate;
+    }
+
+    public void setCanRate(boolean canRate) {
+        this.canRate = canRate;
     }
 }

@@ -11,10 +11,12 @@ import me.elrevin.indexcrm.CustomApp;
 import me.elrevin.indexcrm.mvp.model.NewsCommentModel;
 import me.elrevin.indexcrm.mvp.model.NewsModel;
 import me.elrevin.indexcrm.mvp.model.PutNewsCommentModel;
+import me.elrevin.indexcrm.mvp.model.PutRateNewsCommentModel;
 import me.elrevin.indexcrm.mvp.view.NewsItemView;
 import me.elrevin.indexcrm.providers.news.CommentsProvider;
 import me.elrevin.indexcrm.providers.news.LoadCommentsListHandler;
 import me.elrevin.indexcrm.providers.news.PutNewsCommentHandler;
+import me.elrevin.indexcrm.providers.news.PutRateNewsCommentHandler;
 
 @InjectViewState
 public class NewsItemPresenter extends MvpPresenter<NewsItemView> {
@@ -73,6 +75,27 @@ public class NewsItemPresenter extends MvpPresenter<NewsItemView> {
             }
         };
 
-        commentsProvider.put(handler, newsItem.getId(), text, (replyTo != null ? replyTo.getId() : "0"));
+        commentsProvider.putComment(handler, newsItem.getId(), text, (replyTo != null ? replyTo.getId() : "0"));
+    }
+
+    public void putRateComment(String commentId, String sign) {
+        PutRateNewsCommentHandler handler = new PutRateNewsCommentHandler() {
+            @Override
+            public void onRequestFailure(Throwable t) {
+
+            }
+
+            @Override
+            public void onPuted(PutRateNewsCommentModel result) {
+                getViewState().onPutRateNewsComment(result);
+            }
+
+            @Override
+            public void onAuthFailure() {
+
+            }
+        };
+
+        commentsProvider.putRateComment(handler, newsItem.getId(), commentId, sign);
     }
 }

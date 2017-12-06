@@ -2,6 +2,7 @@ package me.elrevin.indexcrm.providers.current_user;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -46,6 +47,7 @@ public class CurrentUserProvider {
         login = preferences.getString("login", null);
         password = preferences.getString("password", null);
         token = preferences.getString("token", null);
+        Log.i("index.crm", "token: "+token);
         id = preferences.getString("userId", null);
 
     }

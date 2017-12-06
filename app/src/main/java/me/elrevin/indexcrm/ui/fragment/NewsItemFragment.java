@@ -27,6 +27,7 @@ import me.elrevin.indexcrm.common.adapters.NewsCommentsRecyclerAdapter;
 import me.elrevin.indexcrm.mvp.model.NewsCommentModel;
 import me.elrevin.indexcrm.mvp.model.NewsModel;
 import me.elrevin.indexcrm.mvp.model.PutNewsCommentModel;
+import me.elrevin.indexcrm.mvp.model.PutRateNewsCommentModel;
 import me.elrevin.indexcrm.mvp.presenter.NewsItemPresenter;
 import me.elrevin.indexcrm.mvp.view.NewsItemView;
 
@@ -175,5 +176,27 @@ public class NewsItemFragment extends BaseFragment implements NewsItemView {
         rlReplyContainer.setVisibility(View.GONE);
         tvReplyText.setText("");
         replyTo = null;
+    }
+
+    @Override
+    public void onPutRateNewsComment(PutRateNewsCommentModel result) {
+        NewsCommentModel item = newsCommentsRecyclerAdapter.get(result.getId());
+        if (item != null) {
+            item.setRating(result.getRaiting());
+            item.setCanRate(false);
+            newsCommentsRecyclerAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void rateComment(String id, String sign) {
+        presenter.putRateComment(id, sign);
+    }
+
+    public void onRateCommentPlusButtonClick(NewsCommentModel item) {
+        rateComment(item.getId(), "+");
+    }
+
+    public void onRateCommentMinusButtonClick(NewsCommentModel item) {
+        rateComment(item.getId(), "-");
     }
 }

@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -41,6 +43,20 @@ public class NewsCommentsRecyclerAdapter extends RecyclerView.Adapter<NewsCommen
             @Override
             public void onClick(View v) {
                 fragment.onCommentClick(item);
+            }
+        });
+
+        holder.btnPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment.onRateCommentPlusButtonClick(item);
+            }
+        });
+
+        holder.btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment.onRateCommentMinusButtonClick(item);
             }
         });
     }
@@ -91,6 +107,16 @@ public class NewsCommentsRecyclerAdapter extends RecyclerView.Adapter<NewsCommen
         return -1;
     }
 
+    public NewsCommentModel get(String id) {
+        for (int i = 0; i < getItemCount(); i++) {
+            NewsCommentModel item = list.get(i);
+            if (item.getId().equals(id)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.cvNewsCommentItem)
         CardView cv;
@@ -109,6 +135,15 @@ public class NewsCommentsRecyclerAdapter extends RecyclerView.Adapter<NewsCommen
 
         @BindView(R.id.llCommentWrapper)
         LinearLayout llCommentWrapper;
+
+        @BindView(R.id.rlRateContainer)
+        RelativeLayout rlRateContainer;
+
+        @BindView(R.id.btnPlus)
+        Button btnPlus;
+
+        @BindView(R.id.btnMinus)
+        Button btnMinus;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -137,6 +172,12 @@ public class NewsCommentsRecyclerAdapter extends RecyclerView.Adapter<NewsCommen
             int padding = 32 * nest;
 
             llCommentWrapper.setPadding(padding, 0, llCommentWrapper.getPaddingRight(), 0);
+
+            if (item.isCanRate()) {
+                rlRateContainer.setVisibility(View.VISIBLE);
+            } else {
+                rlRateContainer.setVisibility(View.GONE);
+            }
         }
     }
 }
