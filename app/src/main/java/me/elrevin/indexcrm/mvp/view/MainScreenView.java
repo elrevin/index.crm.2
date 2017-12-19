@@ -16,4 +16,5 @@ public interface MainScreenView extends MvpView {
     void onAuthFailure();
 
     void openClientsScreen();
+    void openTasksScreen();
 }

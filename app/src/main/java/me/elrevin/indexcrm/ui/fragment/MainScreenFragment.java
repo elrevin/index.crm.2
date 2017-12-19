@@ -32,6 +32,7 @@ import me.elrevin.indexcrm.mvp.view.MainScreenView;
 import me.elrevin.indexcrm.ui.activity.ClientsActivity;
 import me.elrevin.indexcrm.ui.activity.MainActivity;
 import me.elrevin.indexcrm.ui.activity.NewsActivity;
+import me.elrevin.indexcrm.ui.activity.TasksActivity;
 
 public class MainScreenFragment extends BaseFragment implements MainScreenView {
 
@@ -46,6 +47,9 @@ public class MainScreenFragment extends BaseFragment implements MainScreenView {
 
     @BindView(R.id.btnAllClients)
     Button btnAllClients;
+
+    @BindView(R.id.btnAllTasks)
+    Button btnAllTasks;
 
     TasksListAdapter tasksListAdapter;
     ArrayList<TaskModel> tasksList;
@@ -151,9 +155,19 @@ public class MainScreenFragment extends BaseFragment implements MainScreenView {
         presenter.openClientsScreen();
     }
 
+    @OnClick(R.id.btnAllTasks)
+    public void onBtnAllTasksClick(View v) {
+        presenter.openTasksScreen();
+    }
+
     @Override
     public void openClientsScreen() {
         getBaseActivity().startActivity(ClientsActivity.class);
+    }
+
+    @Override
+    public void openTasksScreen() {
+        getBaseActivity().startActivity(TasksActivity.class);
     }
 
     public void openClientItem(ClientModel item) {

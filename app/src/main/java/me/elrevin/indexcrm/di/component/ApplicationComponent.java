@@ -7,6 +7,8 @@ import me.elrevin.indexcrm.mvp.presenter.ClientsListPresenter;
 import me.elrevin.indexcrm.mvp.presenter.ClientsPresenter;
 import me.elrevin.indexcrm.mvp.presenter.MainScreenPresenter;
 import me.elrevin.indexcrm.mvp.presenter.NewsItemPresenter;
+import me.elrevin.indexcrm.mvp.presenter.TasksListPresenter;
+import me.elrevin.indexcrm.mvp.presenter.TasksPresenter;
 import me.elrevin.indexcrm.providers.clients.ClientsProvider;
 import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 import me.elrevin.indexcrm.di.module.RestModule;
@@ -41,6 +43,8 @@ public interface ApplicationComponent {
     void inject(ClientsPresenter presenter);
     void inject(ClientsListPresenter presenter);
     void inject(NewsItemPresenter presenter);
+    void inject(TasksPresenter presenter);
+    void inject(TasksListPresenter presenter);
 
     // Providers
     void inject(CurrentUserProvider provider);

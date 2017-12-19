@@ -28,9 +28,10 @@
         <activity
             android:name=".ui.activity.ClientsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity android:name=".ui.activity.NewsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            />
+        <activity
+            android:name=".ui.activity.NewsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity android:name=".ui.activity.TasksActivity"></activity>
     </application>
 
 </manifest>
