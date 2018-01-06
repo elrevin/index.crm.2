@@ -2,25 +2,33 @@ package me.elrevin.indexcrm.ui.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
+import butterknife.OnClick;
 import me.elrevin.indexcrm.R;
 import me.elrevin.indexcrm.mvp.model.TaskModel;
 import me.elrevin.indexcrm.mvp.presenter.TaskItemPresenter;
 import me.elrevin.indexcrm.mvp.view.TaskItemView;
+import me.elrevin.indexcrm.providers.tasks.CloseTaskHandler;
+import me.elrevin.indexcrm.providers.tasks.TasksProvider;
+import me.elrevin.indexcrm.ui.activity.TasksActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TaskItemFragment extends BaseFragment implements TaskItemView {
+public class TaskItemFragment extends BaseFragment implements TaskItemView{
 
     private TaskModel task;
 
@@ -45,14 +53,30 @@ public class TaskItemFragment extends BaseFragment implements TaskItemView {
     @BindView(R.id.tvPlanerComment)
     TextView tvPlanerComment;
 
+    @BindView(R.id.edtComment)
+    EditText edtComment;
+
+    @BindView(R.id.btnClose)
+    Button btnClose;
+
+    @BindView(R.id.btnCloseByContact)
+    Button btnCloseByContact;
+
+    @Inject
+    TasksProvider provider;
+
     public TaskItemFragment() {
         // Required empty public constructor
     }
 
     public void setTask(TaskModel task) {
         this.task = task;
-        presenter.setItem(task);
-        presenter.showTask();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        showTask();
     }
 
     @Override
@@ -67,10 +91,17 @@ public class TaskItemFragment extends BaseFragment implements TaskItemView {
 
     @Override
     public void showTask() {
+        tvClientName.setText("");
+        tvEndDate.setText("");
+        tvPlaner.setText("");
+        tvTaskTitle.setText("");
+        tvPlanerComment.setText("");
+        llPlanerComment.setVisibility(View.GONE);
         if (task != null) {
             tvClientName.setText(task.getClient());
             tvEndDate.setText(task.getPlanedEndDateF());
             tvPlaner.setText(task.getPlaner());
+            tvTaskTitle.setText(task.getTitle());
 
             if (task.getPlanedComment() != null && !task.getPlanedComment().isEmpty()) {
                 llPlanerComment.setVisibility(View.VISIBLE);
@@ -79,12 +110,37 @@ public class TaskItemFragment extends BaseFragment implements TaskItemView {
                 llPlanerComment.setVisibility(View.GONE);
                 tvPlanerComment.setText("");
             }
-        } else {
-            tvClientName.setText("");
-            tvEndDate.setText("");
-            tvPlaner.setText("");
-            tvPlanerComment.setText("");
-            llPlanerComment.setVisibility(View.GONE);
         }
     }
+
+    @Override
+    public void onTaskClosed(String id) {
+        ((TasksActivity) getBaseActivity()).onCloseTask(id);
+    }
+
+    @Override
+    public void onRequestFailure(Throwable t) {
+        Toast.makeText(getBaseActivity(), "Проблемы с сетью", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onAuthFailure() {
+
+    }
+
+    @OnClick(R.id.btnClose)
+    void onBtnCloseClick(View v) {
+        if (task != null) {
+            String comment = edtComment.getText().toString();
+            presenter.closeTask(false, comment, task);
+        }
+    }
+    @OnClick(R.id.btnCloseByContact)
+    void onBtnCloseByContactClick(View v) {
+        if (task != null) {
+            String comment = edtComment.getText().toString();
+            presenter.closeTask(true, comment, task);
+        }
+    }
+
 }

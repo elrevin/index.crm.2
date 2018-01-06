@@ -89,6 +89,12 @@ public class MainScreenFragment extends BaseFragment implements MainScreenView {
         tasksListAdapter = new TasksListAdapter(tasksList, getBaseActivity());
         lvTasks.setAdapter(tasksListAdapter);
         presenter.loadTasks();
+        lvTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                openTaskItem((TaskModel) tasksListAdapter.getItem(position));
+            }
+        });
 
         clientsList = new ArrayList<>();
         clientsListAdapter = new ClientsListAdapter(clientsList, getBaseActivity());
@@ -180,5 +186,27 @@ public class MainScreenFragment extends BaseFragment implements MainScreenView {
         Intent intent = new Intent(getBaseActivity(), NewsActivity.class);
         intent.putExtra("NEWS_ITEM", item);
         startActivity(intent);
+    }
+
+    public void openTaskItem(TaskModel item) {
+        Intent intent = new Intent(getBaseActivity(), TasksActivity.class);
+        intent.putExtra("TASK_ITEM", item);
+        startActivityForResult(intent, 9);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 9 && resultCode == 1) {
+            if (!data.getStringExtra("id").isEmpty()) {
+                TaskModel item;
+                for (int i = 0; i < tasksList.size(); i++) {
+                    item = tasksList.get(i);
+                    if (item.getId().equals(data.getStringExtra("id"))) {
+                        tasksList.remove(i);
+                    }
+                }
+                tasksListAdapter.notifyDataSetChanged();
+            }
+        }
     }
 }

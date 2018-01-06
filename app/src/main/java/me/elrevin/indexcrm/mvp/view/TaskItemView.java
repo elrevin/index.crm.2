@@ -7,4 +7,7 @@ import me.elrevin.indexcrm.mvp.model.TaskModel;
 
 public interface TaskItemView extends MvpView {
     void showTask();
+    void onTaskClosed(String id);
+    void onRequestFailure(Throwable t);
+    void onAuthFailure();
 }

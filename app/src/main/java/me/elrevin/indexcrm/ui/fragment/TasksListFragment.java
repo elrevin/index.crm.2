@@ -83,4 +83,8 @@ public class TasksListFragment extends BaseFragment implements TasksListView {
     public void openTask(TaskModel task) {
         ((TasksActivity)getBaseActivity()).openTask(task);
     }
+
+    public void onCloseTask(String id) {
+        listAdapter.removeItemById(id, true);
+    }
 }

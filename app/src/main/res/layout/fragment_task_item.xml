@@ -1,78 +1,124 @@
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="me.elrevin.indexcrm.ui.fragment.TaskItemFragment"
     android:padding="16dp"
+    android:background="@color/colorWhite"
     >
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="96dp"
+        android:layout_alignParentTop="true"
         >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:text="Бурмицкий Евгений"
-                android:id="@+id/tvPlaner"
-                android:layout_alignParentLeft="true"
-                android:textColor="@color/colorTextGray"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:text="23.11.2017"
-                android:id="@+id/tvEndDate"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/colorTextGray"
-                />
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="sf sdf dsf dsf dsf asdf adsf asdf adsf sdf asdf asdf asdfads"
-            android:textColor="@color/colorTextDark"
-            android:layout_marginBottom="8dp"
-            android:id="@+id/tvClientName"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorTextDark"
-            android:textSize="12sp"
-            android:id="@+id/tvTaskTitle"
-            android:text="sfd sdf sdfsdsd fsd fsdf sd fsdf sdf ds fsdfsd f sdfdsf sdf sdf dsf sdfsd fsdfsdf sdfsdf sdfsdfsdfsdfsdfsd f"
-            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="16dp"
             android:orientation="vertical"
-            android:id="@+id/llPlanerComment"
             >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:text="Бурмицкий Евгений"
+                    android:id="@+id/tvPlaner"
+                    android:layout_alignParentLeft="true"
+                    android:textColor="@color/colorTextGray"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:text="23.11.2017"
+                    android:id="@+id/tvEndDate"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorTextGray"
+                    />
+            </RelativeLayout>
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:text="Комментарий планирующего"
-                android:textColor="@color/colorTextGray"
+                android:textSize="16sp"
+                android:text="sf sdf dsf dsf dsf asdf adsf asdf adsf sdf asdf asdf asdfads"
+                android:textColor="@color/colorTextDark"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/tvClientName"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorTextDark"
                 android:textSize="12sp"
-                android:id="@+id/tvPlanerComment"
+                android:id="@+id/tvTaskTitle"
                 android:text="sfd sdf sdfsdsd fsd fsdf sd fsdf sdf ds fsdfsd f sdfdsf sdf sdf dsf sdfsd fsdfsdf sdfsdf sdfsdfsdfsdfsdfsd f"
                 />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:orientation="vertical"
+                android:id="@+id/llPlanerComment"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:text="Комментарий планирующего"
+                    android:textColor="@color/colorTextGray"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextDark"
+                    android:textSize="12sp"
+                    android:id="@+id/tvPlanerComment"
+                    android:text="sfd sdf sdfsdsd fsd fsdf sd fsdf sdf ds fsdfsd f sdfdsf sdf sdf dsf sdfsd fsdfsdf sdfsdf sdfsdfsdfsdfsdfsd f"
+                    />
+            </LinearLayout>
         </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="16dp"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:maxLines ="4"
+            android:maxLength ="2000"
+            android:hint ="Комментарий..."
+            android:background="@color/colorTransparent"
+            android:id="@+id/edtComment"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Закрыть"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/btnClose"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Закрыть контактом"
+                android:layout_alignParentRight="true"
+                android:id="@+id/btnCloseByContact"
+                />
+        </RelativeLayout>
     </LinearLayout>
-</ScrollView>
+</RelativeLayout>

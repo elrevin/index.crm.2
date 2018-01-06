@@ -8,6 +8,7 @@ import me.elrevin.indexcrm.rest.RestClient;
 import me.elrevin.indexcrm.rest.api.CheckAuthRequest;
 import me.elrevin.indexcrm.rest.api.CheckCommonLoginAndPasswordRequest;
 import me.elrevin.indexcrm.rest.api.CheckPersonalLoginAndPasswordRequest;
+import me.elrevin.indexcrm.rest.api.CloseTaskRequest;
 import me.elrevin.indexcrm.rest.api.GetClientsListRequest;
 import me.elrevin.indexcrm.rest.api.GetNewsCommentsListRequest;
 import me.elrevin.indexcrm.rest.api.GetNewstListRequest;
@@ -83,5 +84,11 @@ public class RestModule {
     @Singleton
     public PutRateNewsCommentRequest providePutRateNewsCommentRequest() {
         return restClient.createService(PutRateNewsCommentRequest.class);
+    }
+
+    @Provides
+    @Singleton
+    public CloseTaskRequest provideCloseTaskRequest() {
+        return restClient.createService(CloseTaskRequest.class);
     }
 }

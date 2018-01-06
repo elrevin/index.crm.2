@@ -7,6 +7,7 @@ import me.elrevin.indexcrm.mvp.presenter.ClientsListPresenter;
 import me.elrevin.indexcrm.mvp.presenter.ClientsPresenter;
 import me.elrevin.indexcrm.mvp.presenter.MainScreenPresenter;
 import me.elrevin.indexcrm.mvp.presenter.NewsItemPresenter;
+import me.elrevin.indexcrm.mvp.presenter.TaskItemPresenter;
 import me.elrevin.indexcrm.mvp.presenter.TasksListPresenter;
 import me.elrevin.indexcrm.mvp.presenter.TasksPresenter;
 import me.elrevin.indexcrm.providers.clients.ClientsProvider;
@@ -23,6 +24,7 @@ import me.elrevin.indexcrm.di.module.ApplicationModule;
 import me.elrevin.indexcrm.ui.fragment.AuthFirstFragment;
 import me.elrevin.indexcrm.ui.fragment.AuthSecondFragment;
 import me.elrevin.indexcrm.ui.fragment.BaseFragment;
+import me.elrevin.indexcrm.ui.fragment.TaskItemFragment;
 
 @Singleton
 @Component(
@@ -36,6 +38,7 @@ public interface ApplicationComponent {
     void inject(BaseFragment fragment);
     void inject(AuthFirstFragment fragment);
     void inject(AuthSecondFragment fragment);
+    void inject(TaskItemFragment fragment);
 
     // Presenters
     void inject(MainPresenter presenter);
@@ -45,6 +48,7 @@ public interface ApplicationComponent {
     void inject(NewsItemPresenter presenter);
     void inject(TasksPresenter presenter);
     void inject(TasksListPresenter presenter);
+    void inject(TaskItemPresenter presenter);
 
     // Providers
     void inject(CurrentUserProvider provider);

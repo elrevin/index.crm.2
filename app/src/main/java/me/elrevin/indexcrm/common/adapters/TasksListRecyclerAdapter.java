@@ -78,6 +78,35 @@ public class TasksListRecyclerAdapter extends RecyclerView.Adapter<TasksListRecy
         }
     }
 
+    public TaskModel getItemById(String id) {
+        for (TaskModel item:
+             list) {
+            if (item.getId().equals(id)) {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    public int getPositionById(String id) {
+        for (int i = 0; i < getItemCount(); i++) {
+            if (list.get(i).getId().equals(id)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void removeItemById(String id, boolean notify) {
+        int pos = getPositionById(id);
+        if (pos >= 0) {
+            list.remove(pos);
+            if (notify) {
+                notifyDataSetChanged();
+            }
+        }
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvPlaner)
