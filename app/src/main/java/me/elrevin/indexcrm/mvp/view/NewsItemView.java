@@ -14,6 +14,9 @@ public interface NewsItemView extends MvpView {
     void onCommentsLoaded(List<NewsCommentModel> list, boolean needScroll, String scrollToId);
     void onRequestFailure(Throwable t);
     void onAuthFailure();
+    void login();
     void onPutNewsComment(PutNewsCommentModel result);
     void onPutRateNewsComment(PutRateNewsCommentModel result);
+    void onLoadingStart();
+    void onLoadingEnd();
 }

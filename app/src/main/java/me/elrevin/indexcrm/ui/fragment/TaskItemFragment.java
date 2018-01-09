@@ -28,7 +28,7 @@ import me.elrevin.indexcrm.ui.activity.TasksActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TaskItemFragment extends BaseFragment implements TaskItemView{
+public class TaskItemFragment extends BaseFragment implements TaskItemView {
 
     private TaskModel task;
 
@@ -116,16 +116,6 @@ public class TaskItemFragment extends BaseFragment implements TaskItemView{
     @Override
     public void onTaskClosed(String id) {
         ((TasksActivity) getBaseActivity()).onCloseTask(id);
-    }
-
-    @Override
-    public void onRequestFailure(Throwable t) {
-        Toast.makeText(getBaseActivity(), "Проблемы с сетью", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onAuthFailure() {
-
     }
 
     @OnClick(R.id.btnClose)

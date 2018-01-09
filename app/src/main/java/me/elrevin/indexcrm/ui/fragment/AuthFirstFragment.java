@@ -71,21 +71,19 @@ public class AuthFirstFragment extends BaseFragment implements CheckCommonLoginA
         currentUserProvider.setLogin(etLogin.getText().toString());
         currentUserProvider.setPassword(etPassword.getText().toString());
 
+        getBaseActivity().onLoadingStart();
         currentUserProvider.checkCommonLoginAndPassword(this);
     }
 
     @Override
-    public void onRequestFailure(Throwable t) {
-        Log.e("index-crm", "Ошибка сети", t);
-    }
-
-    @Override
     public void onLoginOrPasswordIncorrect() {
+        getBaseActivity().onLoadingEnd();
         Toast.makeText(this.getActivity(), "Логин или пароль введены не верно", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onLoginAndPasswordCorrect() {
+        getBaseActivity().onLoadingEnd();
         Intent intent = new Intent();
         intent.putExtra("step", 2);
         getBaseActivity().onFragmentData(BaseActivity.SET_AUTH_STEP, intent);

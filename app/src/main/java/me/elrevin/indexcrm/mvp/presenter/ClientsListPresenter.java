@@ -23,20 +23,23 @@ public class ClientsListPresenter extends MvpPresenter<ClientsListView> {
     }
 
     protected void pLoadClients(String name) {
+        getViewState().onLoadingStart();
         LoadClientsListHandler handler = new LoadClientsListHandler() {
             @Override
             public void onRequestFailure(Throwable t) {
-
+                getViewState().onRequestFailure(t);
             }
 
             @Override
             public void onLoaded(List<ClientModel> list) {
+                getViewState().onLoadingEnd();
                 getViewState().onClientsLoaded(list);
             }
 
             @Override
             public void onAuthFailure() {
-
+                getViewState().onLoadingEnd();
+                getViewState().onAuthFailure();
             }
         };
 

@@ -3,21 +3,22 @@ package me.elrevin.indexcrm.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+
 import me.elrevin.indexcrm.mvp.model.NewsModel;
+import me.elrevin.indexcrm.mvp.presenter.NewsPresenter;
+import me.elrevin.indexcrm.mvp.view.NewsView;
 import me.elrevin.indexcrm.ui.fragment.NewsItemFragment;
 
-public class NewsActivity extends BaseActivity {
+public class NewsActivity extends BaseActivity implements NewsView {
+
+    @InjectPresenter
+    NewsPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        if (intent.hasExtra("NEWS_ITEM")) {
-            NewsModel item = (NewsModel) intent.getSerializableExtra("NEWS_ITEM");
-            openNews(item);
-        } else {
-            finish();
-        }
+        presenter.checkAuth();
     }
 
     @Override
@@ -39,6 +40,23 @@ public class NewsActivity extends BaseActivity {
     @Override
     public boolean setDisplayHomeAsUpEnabled() {
         return true;
+    }
+
+    @Override
+    protected void setUpUi() {
+        super.setUpUi();
+        Intent intent = getIntent();
+        if (intent.hasExtra("NEWS_ITEM")) {
+            NewsModel item = (NewsModel) intent.getSerializableExtra("NEWS_ITEM");
+            openNews(item);
+        } else {
+            finish();
+        }
+    }
+
+    @Override
+    public void onLoginFail() {
+        presenter.checkAuth();
     }
 
 }

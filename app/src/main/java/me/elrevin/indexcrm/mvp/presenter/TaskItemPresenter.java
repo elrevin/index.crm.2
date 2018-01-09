@@ -26,6 +26,7 @@ public class TaskItemPresenter extends MvpPresenter<TaskItemView> {
     }
 
     public void closeTask(boolean createContact, String comment, TaskModel task) {
+        getViewState().onLoadingStart();
         CloseTaskHandler handler = new CloseTaskHandler() {
             @Override
             public void onRequestFailure(Throwable t) {
@@ -34,11 +35,13 @@ public class TaskItemPresenter extends MvpPresenter<TaskItemView> {
 
             @Override
             public void onClosed(String id) {
+                getViewState().onLoadingEnd();
                 getViewState().onTaskClosed(id);
             }
 
             @Override
             public void onAuthFailure() {
+                getViewState().onLoadingEnd();
                 getViewState().onAuthFailure();
             }
         };

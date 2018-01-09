@@ -25,7 +25,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
             currentUserProvider.checkAuth(new CheckAuthHandler() {
                 @Override
                 public void onRequestFailure(Throwable t) {
-
+                    getViewState().onNetworkFailure(t);
                 }
 
                 @Override

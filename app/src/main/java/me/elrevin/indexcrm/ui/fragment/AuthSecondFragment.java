@@ -70,24 +70,29 @@ public class AuthSecondFragment extends BaseFragment {
     public void onBtnEnterClick(View view) {
         String login = etLogin.getText().toString();
         String password = etPassword.getText().toString();
+        getBaseActivity().onLoadingStart();
         currentUserProvider.checkPersonalLoginAndPassword(login, password, new CheckPersonalLoginAndPasswordHandler() {
             @Override
             public void onRequestFailure(Throwable t) {
+                getBaseActivity().onLoadingEnd();
                 Toast.makeText(getBaseActivity(), "Ошибка сети", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onLoginOrPasswordIncorrect() {
+                getBaseActivity().onLoadingEnd();
                 Toast.makeText(getBaseActivity(), "Логин или пароль введены не верно", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onLoginAndPasswordCorrect() {
+                getBaseActivity().onLoadingEnd();
                 getBaseActivity().onFragmentData(BaseActivity.AUTH_SUCCESSFUL, null);
             }
 
             @Override
             public void onCommonAuthFailure() {
+                getBaseActivity().onLoadingEnd();
                 Intent intent = new Intent();
                 intent.putExtra("step", 1);
                 getBaseActivity().onFragmentData(BaseActivity.SET_AUTH_STEP, intent);

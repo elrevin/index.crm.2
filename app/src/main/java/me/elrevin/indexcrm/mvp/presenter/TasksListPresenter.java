@@ -27,17 +27,19 @@ public class TasksListPresenter extends MvpPresenter<TasksListView> {
         LoadTasksListHandler handler = new LoadTasksListHandler() {
             @Override
             public void onRequestFailure(Throwable t) {
-
+                getViewState().onRequestFailure(t);
             }
 
             @Override
             public void onLoaded(List<TaskModel> list) {
+                getViewState().onLoadingEnd();
                 getViewState().onTasksLoaded(list);
             }
 
             @Override
             public void onAuthFailure() {
-
+                getViewState().onLoadingEnd();
+                getViewState().onAuthFailure();
             }
         };
 

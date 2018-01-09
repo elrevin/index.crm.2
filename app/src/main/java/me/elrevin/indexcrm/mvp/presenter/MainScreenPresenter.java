@@ -35,58 +35,67 @@ public class MainScreenPresenter extends MvpPresenter <MainScreenView> {
     }
 
     public void loadTasks() {
+        getViewState().onLoadingStart();
         tasksProvider.loadList(3, new LoadTasksListHandler() {
             @Override
             public void onRequestFailure(Throwable t) {
-
+                getViewState().onRequestFailure(t);
             }
 
             @Override
             public void onLoaded(List<TaskModel> list) {
+                getViewState().onLoadingEnd();
                 getViewState().onTasksLoaded(list);
             }
 
             @Override
             public void onAuthFailure() {
-
+                getViewState().onLoadingEnd();
+                getViewState().onAuthFailure();
             }
         });
     }
 
     public void loadClients() {
+        getViewState().onLoadingStart();
         clientsProvider.loadList(3, new LoadClientsListHandler() {
             @Override
             public void onRequestFailure(Throwable t) {
-
+                getViewState().onRequestFailure(t);
             }
 
             @Override
             public void onLoaded(List<ClientModel> list) {
+                getViewState().onLoadingEnd();
                 getViewState().onClientsLoaded(list);
             }
 
             @Override
             public void onAuthFailure() {
-
+                getViewState().onLoadingEnd();
+                getViewState().onAuthFailure();
             }
         });
     }
 
     public  void loadNews() {
+        getViewState().onLoadingStart();
         newsProvider.loadList(new LoadNewsListHandler() {
             @Override
             public void onRequestFailure(Throwable t) {
-
+                getViewState().onRequestFailure(t);
             }
 
             @Override
             public void onLoaded(List<NewsModel> list) {
+                getViewState().onLoadingEnd();
                 getViewState().onNewsLoaded(list);
             }
 
             @Override
             public void onAuthFailure() {
-
+                getViewState().onLoadingEnd();
+                getViewState().onAuthFailure();
             }
         });
     }

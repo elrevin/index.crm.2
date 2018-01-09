@@ -20,9 +20,8 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         CustomApp.getApplicationComponent().inject(this);
-        setContent(new AuthFirstFragment());
+        setUpUi();
     }
 
     @Override
@@ -44,6 +43,17 @@ public class LoginActivity extends BaseActivity {
             setResult(Constants.RESULT_OK, null);
             finish();
         }
+    }
+
+    @Override
+    protected void setUpUi() {
+        super.setUpUi();
+        setContent(new AuthFirstFragment());
+    }
+
+    @Override
+    public void onLoginFail() {
+        // We don't use this method, but it must be.
     }
 
 }

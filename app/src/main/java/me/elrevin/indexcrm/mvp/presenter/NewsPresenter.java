@@ -3,29 +3,20 @@ package me.elrevin.indexcrm.mvp.presenter;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import me.elrevin.indexcrm.CustomApp;
-import me.elrevin.indexcrm.mvp.model.ClientModel;
-import me.elrevin.indexcrm.mvp.view.ClientsView;
-import me.elrevin.indexcrm.providers.clients.ClientsProvider;
-import me.elrevin.indexcrm.providers.clients.LoadClientsListHandler;
+import me.elrevin.indexcrm.mvp.view.NewsView;
 import me.elrevin.indexcrm.providers.current_user.CheckAuthHandler;
 import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 
 @InjectViewState
-public class ClientsPresenter extends MvpPresenter<ClientsView> {
+public class NewsPresenter extends MvpPresenter<NewsView> {
     @Inject
     CurrentUserProvider currentUserProvider;
 
-    public ClientsPresenter() {
+    public NewsPresenter() {
         CustomApp.getApplicationComponent().inject(this);
-    }
-
-    public void showClientsList() {
-        getViewState().showClientsList();
     }
 
     public void checkAuth() {

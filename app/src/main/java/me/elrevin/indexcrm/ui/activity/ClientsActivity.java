@@ -25,14 +25,7 @@ public class ClientsActivity extends BaseActivity implements ClientsView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Intent intent = getIntent();
-        if (intent.hasExtra("CLIENT_ITEM")) {
-            ClientModel item = (ClientModel) intent.getSerializableExtra("CLIENT_ITEM");
-            openClient(item);
-        } else {
-            presenter.showClientsList();
-        }
+        presenter.checkAuth();
     }
 
     @Override
@@ -48,6 +41,23 @@ public class ClientsActivity extends BaseActivity implements ClientsView {
     @Override
     public boolean setDisplayHomeAsUpEnabled() {
         return true;
+    }
+
+    @Override
+    protected void setUpUi() {
+        super.setUpUi();
+        Intent intent = getIntent();
+        if (intent.hasExtra("CLIENT_ITEM")) {
+            ClientModel item = (ClientModel) intent.getSerializableExtra("CLIENT_ITEM");
+            openClient(item);
+        } else {
+            presenter.showClientsList();
+        }
+    }
+
+    @Override
+    public void onLoginFail() {
+        presenter.checkAuth();
     }
 
     public void openClient(ClientModel client) {

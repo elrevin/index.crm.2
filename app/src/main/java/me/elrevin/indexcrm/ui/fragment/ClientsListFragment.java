@@ -108,11 +108,6 @@ public class ClientsListFragment extends BaseFragment implements ClientsListView
         Toast.makeText(getBaseActivity(), "Проблемы с сетью", Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public void onAuthFailure() {
-
-    }
-
     public void openClient(ClientModel client) {
         ((ClientsActivity) getBaseActivity()).openClient(client);
     }

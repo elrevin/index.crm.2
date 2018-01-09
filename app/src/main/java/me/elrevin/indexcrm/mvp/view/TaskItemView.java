@@ -10,4 +10,7 @@ public interface TaskItemView extends MvpView {
     void onTaskClosed(String id);
     void onRequestFailure(Throwable t);
     void onAuthFailure();
+    void login();
+    void onLoadingStart();
+    void onLoadingEnd();
 }

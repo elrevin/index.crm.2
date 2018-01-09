@@ -1,5 +1,7 @@
 package me.elrevin.indexcrm.ui.activity;
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -9,12 +11,19 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.elrevin.indexcrm.Constants;
 import me.elrevin.indexcrm.CustomApp;
 import me.elrevin.indexcrm.R;
 import me.elrevin.indexcrm.common.FragmentManager;
@@ -27,10 +36,22 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
 
     public static final int REQUEST_PHONE_CALL = 1;
 
+    protected int loadingStarts;
+
+    private int mShortAnimationDuration;
+
     protected String callPhoneNumber;
+
+    @BindView(R.id.llContent)
+    LinearLayout llContent;
+
+    @BindView(R.id.pbSpinner)
+    ProgressBar pbSpinner;
 
     @Inject
     public FragmentManager fragmentManager;
+
+    protected boolean isUiSettedUp = false;
 
     protected boolean haveToolbar() {
         return false;
@@ -39,6 +60,11 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        loadingStarts = 0;
+
+        mShortAnimationDuration = getResources().getInteger(
+                android.R.integer.config_shortAnimTime);
 
         if (getMainContentLayout() == 0) {
             if (haveToolbar()) {
@@ -58,6 +84,7 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
 
         ButterKnife.bind(this);
     }
+
 
 
     @LayoutRes
@@ -150,4 +177,88 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
             }
         }
     }
+
+    protected void setUpUi() {
+        isUiSettedUp = true;
+        pbSpinner.setVisibility(View.GONE);
+        llContent.setVisibility(View.VISIBLE);
+    }
+
+    public void login() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivityForResult(intent, Constants.REQUEST_CODE_LOGIN);
+    }
+
+    public void afterLogin() {
+        if (!isUiSettedUp) {
+            setUpUi();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.REQUEST_CODE_LOGIN) {
+            if (resultCode == Constants.RESULT_OK) {
+                setUpUi();
+            } else {
+                onLoginFail();
+            }
+        }
+    }
+
+    public abstract void onLoginFail();
+
+    public void onNetworkFailure(Throwable t) {
+        onLoadingEnd();
+        Log.e("index.crm", t.toString());
+        Toast.makeText(this, "Нет сети", Toast.LENGTH_LONG).show();
+    }
+
+    public void onLoadingStart() {
+        if (loadingStarts == 0) {
+            pbSpinner.setAlpha(0f);
+            pbSpinner.setVisibility(View.VISIBLE);
+            pbSpinner.animate()
+                    .alpha(1f)
+                    .setDuration(mShortAnimationDuration)
+                    .setListener(null);
+
+            llContent.animate()
+                    .alpha(0f)
+                    .setDuration(mShortAnimationDuration)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            llContent.setVisibility(View.GONE);
+                        }
+                    });
+        }
+        loadingStarts++;
+    }
+
+    public void onLoadingEnd() {
+        if (loadingStarts == 1) {
+            llContent.setAlpha(0f);
+            llContent.setVisibility(View.VISIBLE);
+
+            pbSpinner.animate()
+                    .alpha(0f)
+                    .setDuration(mShortAnimationDuration)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            pbSpinner.setVisibility(View.GONE);
+                        }
+                    });
+            llContent.animate()
+                    .alpha(1f)
+                    .setDuration(mShortAnimationDuration)
+                    .setListener(null);
+        }
+        if (loadingStarts > 0) {
+            loadingStarts--;
+        }
+    }
+
 }

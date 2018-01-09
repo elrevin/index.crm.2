@@ -23,6 +23,17 @@ public class TasksActivity extends BaseActivity implements TasksView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter.checkAuth();
+    }
+
+    @Override
+    public boolean setDisplayHomeAsUpEnabled() {
+        return true;
+    }
+
+    @Override
+    protected void setUpUi() {
+        super.setUpUi();
         Intent intent = getIntent();
         if (intent.hasExtra("TASK_ITEM")) {
             oneTask = true;
@@ -35,8 +46,8 @@ public class TasksActivity extends BaseActivity implements TasksView {
     }
 
     @Override
-    public boolean setDisplayHomeAsUpEnabled() {
-        return true;
+    public void onLoginFail() {
+        presenter.checkAuth();
     }
 
     @Override

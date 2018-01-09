@@ -8,4 +8,7 @@ import me.elrevin.indexcrm.mvp.model.ClientModel;
 
 public interface ClientsView extends MvpView {
     void showClientsList();
+    void login();
+    void afterLogin();
+    void onNetworkFailure(Throwable t);
 }

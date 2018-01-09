@@ -10,6 +10,9 @@ public interface TasksListView extends MvpView {
     void onTasksLoaded(List<TaskModel> list);
     void onRequestFailure(Throwable t);
     void onAuthFailure();
+    void login();
+    void onLoadingStart();
+    void onLoadingEnd();
 
     void openTask(TaskModel task);
 }

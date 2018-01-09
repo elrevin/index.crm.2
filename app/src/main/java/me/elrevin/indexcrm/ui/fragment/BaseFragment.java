@@ -41,4 +41,24 @@ public abstract class BaseFragment extends MvpAppCompatFragment {
     public boolean needFab() {
         return false;
     }
+
+    public void login() {
+        getBaseActivity().login();
+    }
+
+    public void onAuthFailure() {
+        getBaseActivity().onLoginFail();
+    }
+
+    public void onRequestFailure(Throwable t) {
+        getBaseActivity().onNetworkFailure(t);
+    }
+
+    public void onLoadingStart() {
+        getBaseActivity().onLoadingStart();
+    }
+
+    public void onLoadingEnd() {
+        getBaseActivity().onLoadingEnd();
+    }
 }

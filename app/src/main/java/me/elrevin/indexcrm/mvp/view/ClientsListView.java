@@ -10,4 +10,7 @@ public interface ClientsListView extends MvpView {
     void onClientsLoaded(List<ClientModel> list);
     void onRequestFailure(Throwable t);
     void onAuthFailure();
+    void login();
+    void onLoadingStart();
+    void onLoadingEnd();
 }

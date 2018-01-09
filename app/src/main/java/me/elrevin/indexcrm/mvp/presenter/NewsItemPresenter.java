@@ -38,40 +38,46 @@ public class NewsItemPresenter extends MvpPresenter<NewsItemView> {
     }
 
     public void loadComments(boolean needScroll, String scrollToId) {
+        getViewState().onLoadingStart();
         LoadCommentsListHandler handler = new LoadCommentsListHandler() {
             @Override
             public void onRequestFailure(Throwable t) {
-
+                getViewState().onRequestFailure(t);
             }
 
             @Override
             public void onLoaded(List<NewsCommentModel> list) {
+                getViewState().onLoadingEnd();
                 getViewState().onCommentsLoaded(list, needScroll, scrollToId);
             }
 
             @Override
             public void onAuthFailure() {
-
+                getViewState().onLoadingEnd();
+                getViewState().onAuthFailure();
             }
         };
         commentsProvider.loadList(handler, newsItem.getId());
     }
 
     public void putComment(String text, NewsCommentModel replyTo) {
+        getViewState().onLoadingStart();
         PutNewsCommentHandler handler = new PutNewsCommentHandler() {
             @Override
             public void onRequestFailure(Throwable t) {
-
+                getViewState().onRequestFailure(t);
             }
 
             @Override
             public void onPuted(PutNewsCommentModel result) {
+                getViewState().onLoadingEnd();
                 getViewState().onPutNewsComment(result);
             }
 
             @Override
             public void onAuthFailure() {
-
+                getViewState().onLoadingEnd();
+                getViewState().onAuthFailure();
             }
         };
 
@@ -79,20 +85,23 @@ public class NewsItemPresenter extends MvpPresenter<NewsItemView> {
     }
 
     public void putRateComment(String commentId, String sign) {
+        getViewState().onLoadingStart();
         PutRateNewsCommentHandler handler = new PutRateNewsCommentHandler() {
             @Override
             public void onRequestFailure(Throwable t) {
-
+                getViewState().onRequestFailure(t);
             }
 
             @Override
             public void onPuted(PutRateNewsCommentModel result) {
+                getViewState().onLoadingEnd();
                 getViewState().onPutRateNewsComment(result);
             }
 
             @Override
             public void onAuthFailure() {
-
+                getViewState().onLoadingEnd();
+                getViewState().onAuthFailure();
             }
         };
 
