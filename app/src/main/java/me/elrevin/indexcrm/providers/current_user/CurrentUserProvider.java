@@ -11,6 +11,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import me.elrevin.indexcrm.CustomApp;
+import me.elrevin.indexcrm.common.CustomActivityManager;
 import me.elrevin.indexcrm.mvp.model.BaseModel;
 import me.elrevin.indexcrm.mvp.model.CheckAuthModel;
 import me.elrevin.indexcrm.mvp.model.CheckPersonalLoginAndPasswordModel;
@@ -18,8 +19,11 @@ import me.elrevin.indexcrm.rest.api.ApiMethods;
 import me.elrevin.indexcrm.rest.api.CheckAuthRequest;
 import me.elrevin.indexcrm.rest.api.CheckCommonLoginAndPasswordRequest;
 import me.elrevin.indexcrm.rest.api.CheckPersonalLoginAndPasswordRequest;
+import me.elrevin.indexcrm.rest.api.GetNetRequest;
+import me.elrevin.indexcrm.rest.api.GetPlushkiRequest;
 import me.elrevin.indexcrm.rest.models.CheckAuthRequestModel;
 import me.elrevin.indexcrm.rest.models.CheckPersonalLoginAndPasswordRequestModel;
+import me.elrevin.indexcrm.rest.models.GetNetRequestModel;
 import retrofit2.Response;
 
 public class CurrentUserProvider {
@@ -36,6 +40,15 @@ public class CurrentUserProvider {
 
     @Inject
     public CheckAuthRequest checkAuthRequest;
+
+    @Inject
+    public GetNetRequest getNetRequest;
+
+    @Inject
+    public GetPlushkiRequest getPlushkiRequest;
+
+    @Inject
+    CustomActivityManager activityManager;
 
     private SharedPreferences preferences;
 
@@ -117,13 +130,16 @@ public class CurrentUserProvider {
                     @Override
                     public Response<BaseModel> apply(@NonNull Throwable throwable) throws Exception {
                         handler.onRequestFailure(throwable);
+                        activityManager.onHomeNetHandler(false);
                         return null;
                     }
                 })
                 .subscribe(response -> {
                     if (response.code() == 200 && response.body() != null && response.body().getStatus()) {
+                        activityManager.onHomeNetHandler(response.body().getInHomeNet());
                         handler.onLoginAndPasswordCorrect();
                     } else {
+                        activityManager.onHomeNetHandler(false);
                         handler.onLoginOrPasswordIncorrect();
                     }
                 });
@@ -137,6 +153,7 @@ public class CurrentUserProvider {
                 .onErrorReturn(new Function<Throwable, Response<CheckPersonalLoginAndPasswordModel>>() {
                     @Override
                     public Response<CheckPersonalLoginAndPasswordModel> apply(@NonNull Throwable throwable) throws Exception {
+                        activityManager.onHomeNetHandler(false);
                         handler.onRequestFailure(throwable);
                         return null;
                     }
@@ -144,16 +161,20 @@ public class CurrentUserProvider {
                 .subscribe(response -> {
                     if (response.code() == 200 && response.body() != null) {
                         if (response.body().getStatus()) {
+                            activityManager.onHomeNetHandler(response.body().getInHomeNet());
                             handler.onLoginAndPasswordCorrect();
                             setId(response.body().getId());
                             setToken(response.body().getToken());
                         } else {
+                            activityManager.onHomeNetHandler(false);
                             handler.onLoginOrPasswordIncorrect();
                         }
                     } else {
                         if (response.code() == 401) {
+                            activityManager.onHomeNetHandler(false);
                             handler.onCommonAuthFailure();
                         } else {
+                            activityManager.onHomeNetHandler(false);
                             handler.onRequestFailure(null);
                         }
                     }
@@ -168,6 +189,7 @@ public class CurrentUserProvider {
                 .onErrorReturn(new Function<Throwable, Response<CheckAuthModel>>() {
                     @Override
                     public Response<CheckAuthModel> apply(@NonNull Throwable throwable) throws Exception {
+                        activityManager.onHomeNetHandler(false);
                         handler.onRequestFailure(throwable);
                         return null;
                     }
@@ -175,7 +197,63 @@ public class CurrentUserProvider {
                 .subscribe(response -> {
                     if (response.code() == 200 && response.body() != null) {
                         if (response.body().getStatus()) {
+                            activityManager.onHomeNetHandler(response.body().getInHomeNet());
                             handler.onAuthCorrect();
+                        } else {
+                            activityManager.onHomeNetHandler(false);
+                            handler.onAuthFailure();
+                        }
+                    } else {
+                        if (response.code() == 401) {
+                            activityManager.onHomeNetHandler(false);
+                            handler.onAuthFailure();
+                        } else {
+                            activityManager.onHomeNetHandler(false);
+                            handler.onRequestFailure(null);
+                        }
+                    }
+                });
+    }
+
+    public void getNet( final GetNetHandler handler) {
+        String authStr = ApiMethods.getBasicAuthString(getLogin(), getPassword());
+        getNetRequest.get(authStr, new GetNetRequestModel().toMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorReturn((t) -> {
+                    handler.onRequestFailure(t);
+                    return null;
+                })
+                .subscribe(response -> {
+                    if (response.code() == 200 && response.body() != null) {
+                        if (response.body().getStatus()) {
+                            handler.onGetNet(response.body());
+                        } else {
+                            handler.onAuthFailure();
+                        }
+                    } else {
+                        if (response.code() == 401) {
+                            handler.onAuthFailure();
+                        } else {
+                            handler.onRequestFailure(null);
+                        }
+                    }
+                });
+    }
+
+    public void getPlushki( final GetPlushkiHandler handler) {
+        String authStr = ApiMethods.getBasicAuthString(getLogin(), getPassword());
+        getPlushkiRequest.get(authStr, new GetNetRequestModel().toMap())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorReturn((t) -> {
+                    handler.onRequestFailure(t);
+                    return null;
+                })
+                .subscribe(response -> {
+                    if (response.code() == 200 && response.body() != null) {
+                        if (response.body().getStatus()) {
+                            handler.onGetPlushki(response.body());
                         } else {
                             handler.onAuthFailure();
                         }

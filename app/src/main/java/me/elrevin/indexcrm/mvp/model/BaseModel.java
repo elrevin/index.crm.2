@@ -5,6 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import javax.inject.Inject;
+
+import me.elrevin.indexcrm.CustomApp;
+import me.elrevin.indexcrm.common.CustomActivityManager;
+
 public class BaseModel implements Serializable {
 
     @SerializedName("status")
@@ -13,6 +18,9 @@ public class BaseModel implements Serializable {
     @SerializedName("error")
     @Expose
     private String error;
+    @SerializedName("in_home_net")
+    @Expose
+    private boolean inHomeNet;
 
     public Boolean getStatus() {
         return status;
@@ -30,4 +38,11 @@ public class BaseModel implements Serializable {
         this.error = error;
     }
 
+    public boolean getInHomeNet() {
+        return inHomeNet;
+    }
+
+    public void setInHomeNet(boolean inHomeNet) {
+        this.inHomeNet = inHomeNet;
+    }
 }

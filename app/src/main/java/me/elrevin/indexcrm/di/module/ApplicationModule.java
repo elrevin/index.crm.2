@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import me.elrevin.indexcrm.CustomApp;
+import me.elrevin.indexcrm.common.CustomActivityManager;
 import me.elrevin.indexcrm.providers.clients.ClientsProvider;
 import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 import me.elrevin.indexcrm.common.FragmentManager;
@@ -68,5 +69,11 @@ public class ApplicationModule {
     @Provides
     public FragmentManager provideFragmentManager(){
         return new FragmentManager();
+    }
+
+    @Provides
+    @Singleton
+    public CustomActivityManager provideActivityManager() {
+        return new CustomActivityManager();
     }
 }

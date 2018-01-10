@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import me.elrevin.indexcrm.CustomApp;
+import me.elrevin.indexcrm.common.CustomActivityManager;
 import me.elrevin.indexcrm.mvp.model.TaskModel;
 import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 import me.elrevin.indexcrm.rest.api.ApiMethods;
@@ -25,6 +26,9 @@ public class TasksProvider {
     @Inject
     CloseTaskRequest closeTaskRequest;
 
+    @Inject
+    CustomActivityManager activityManager;
+
     public TasksProvider() {
         CustomApp.getApplicationComponent().inject(this);
     }
@@ -35,6 +39,7 @@ public class TasksProvider {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorReturn((t) -> {
+                    activityManager.onHomeNetHandler(false);
                     handler.onRequestFailure(t);
                     return null;
                 })
@@ -42,9 +47,11 @@ public class TasksProvider {
                     if (response.code() == 200) {
                         if (response.body() != null) {
                             if (response.body().getStatus()) {
+                                activityManager.onHomeNetHandler(response.body().getInHomeNet());
                                 handler.onLoaded(response.body().getList());
                                 return;
                             } else if (response.body().getError().equals("AUTH_ERROR")) {
+                                activityManager.onHomeNetHandler(false);
                                 handler.onAuthFailure();
                                 return;
                             }
@@ -52,6 +59,7 @@ public class TasksProvider {
                     }
 
                     if (response.code() == 401) {
+                        activityManager.onHomeNetHandler(false);
                         handler.onAuthFailure();
                         return;
                     }
@@ -65,6 +73,7 @@ public class TasksProvider {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorReturn((t) -> {
+                    activityManager.onHomeNetHandler(false);
                     handler.onRequestFailure(t);
                     return null;
                 })
@@ -72,9 +81,11 @@ public class TasksProvider {
                     if (response.code() == 200) {
                         if (response.body() != null) {
                             if (response.body().getStatus()) {
+                                activityManager.onHomeNetHandler(response.body().getInHomeNet());
                                 handler.onClosed(response.body().getId());
                                 return;
                             } else if (response.body().getError().equals("AUTH_ERROR")) {
+                                activityManager.onHomeNetHandler(false);
                                 handler.onAuthFailure();
                                 return;
                             }
@@ -82,6 +93,7 @@ public class TasksProvider {
                     }
 
                     if (response.code() == 401) {
+                        activityManager.onHomeNetHandler(false);
                         handler.onAuthFailure();
                         return;
                     }

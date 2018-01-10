@@ -3,6 +3,7 @@ package me.elrevin.indexcrm.di.component;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import me.elrevin.indexcrm.mvp.model.BaseModel;
 import me.elrevin.indexcrm.mvp.presenter.ClientsListPresenter;
 import me.elrevin.indexcrm.mvp.presenter.ClientsPresenter;
 import me.elrevin.indexcrm.mvp.presenter.MainScreenPresenter;
@@ -61,5 +62,4 @@ public interface ApplicationComponent {
 
     // models
     void inject(BaseRequestModel model);
-
 }

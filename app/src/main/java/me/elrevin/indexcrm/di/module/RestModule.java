@@ -10,8 +10,10 @@ import me.elrevin.indexcrm.rest.api.CheckCommonLoginAndPasswordRequest;
 import me.elrevin.indexcrm.rest.api.CheckPersonalLoginAndPasswordRequest;
 import me.elrevin.indexcrm.rest.api.CloseTaskRequest;
 import me.elrevin.indexcrm.rest.api.GetClientsListRequest;
+import me.elrevin.indexcrm.rest.api.GetNetRequest;
 import me.elrevin.indexcrm.rest.api.GetNewsCommentsListRequest;
 import me.elrevin.indexcrm.rest.api.GetNewstListRequest;
+import me.elrevin.indexcrm.rest.api.GetPlushkiRequest;
 import me.elrevin.indexcrm.rest.api.GetTasksListRequest;
 import me.elrevin.indexcrm.rest.api.PutNewsCommentRequest;
 import me.elrevin.indexcrm.rest.api.PutRateNewsCommentRequest;
@@ -90,5 +92,17 @@ public class RestModule {
     @Singleton
     public CloseTaskRequest provideCloseTaskRequest() {
         return restClient.createService(CloseTaskRequest.class);
+    }
+
+    @Provides
+    @Singleton
+    public GetNetRequest provideGetNetRequest() {
+        return restClient.createService(GetNetRequest.class);
+    }
+
+    @Provides
+    @Singleton
+    public GetPlushkiRequest provideGetPlushkiRequest() {
+        return restClient.createService(GetPlushkiRequest.class);
     }
 }

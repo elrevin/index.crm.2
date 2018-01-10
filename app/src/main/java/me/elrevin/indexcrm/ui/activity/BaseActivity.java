@@ -13,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import butterknife.ButterKnife;
 import me.elrevin.indexcrm.Constants;
 import me.elrevin.indexcrm.CustomApp;
 import me.elrevin.indexcrm.R;
+import me.elrevin.indexcrm.common.CustomActivityManager;
 import me.elrevin.indexcrm.common.FragmentManager;
 import me.elrevin.indexcrm.ui.fragment.BaseFragment;
 
@@ -50,6 +52,9 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
 
     @Inject
     public FragmentManager fragmentManager;
+
+    @Inject
+    public CustomActivityManager activityManager;
 
     protected boolean isUiSettedUp = false;
 
@@ -261,4 +266,39 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        activityManager.setCurrentActivity(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        clearReferences();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        clearReferences();
+    }
+
+    private void clearReferences(){
+        BaseActivity currActivity = activityManager.getCurrentActivity();
+        if (this.equals(currActivity))
+            activityManager.setCurrentActivity(null);
+    }
+
+    public void onHomeNet() {
+//        if (haveToolbar()) {
+//            ((ImageView) findViewById(R.id.ivHomeNet)).setVisibility(View.VISIBLE);
+//        }
+    }
+
+    public void onResumeHomeNet() {
+//        if (haveToolbar()) {
+//            ((ImageView) findViewById(R.id.ivHomeNet)).setVisibility(View.GONE);
+//        }
+    }
 }

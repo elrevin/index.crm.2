@@ -21,4 +21,8 @@ public interface MainScreenView extends MvpView {
 
     void onLoadingStart();
     void onLoadingEnd();
+
+    void onGetNet(boolean home);
+
+    void onGetPlushki(Integer count);
 }

@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import me.elrevin.indexcrm.CustomApp;
+import me.elrevin.indexcrm.common.CustomActivityManager;
 import me.elrevin.indexcrm.providers.current_user.CurrentUserProvider;
 import me.elrevin.indexcrm.rest.api.ApiMethods;
 import me.elrevin.indexcrm.rest.api.GetNewsCommentsListRequest;
@@ -29,6 +30,9 @@ public class CommentsProvider {
     @Inject
     PutRateNewsCommentRequest putRateNewsCommentRequest;
 
+    @Inject
+    CustomActivityManager activityManager;
+
     public CommentsProvider() {
         CustomApp.getApplicationComponent().inject(this);
     }
@@ -39,6 +43,7 @@ public class CommentsProvider {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorReturn((t) -> {
+                    activityManager.onHomeNetHandler(false);
                     handler.onRequestFailure(t);
                     return null;
                 })
@@ -46,9 +51,11 @@ public class CommentsProvider {
                     if (response.code() == 200) {
                         if (response.body() != null) {
                             if (response.body().getStatus()) {
+                                activityManager.onHomeNetHandler(response.body().getInHomeNet());
                                 handler.onLoaded(response.body().getList());
                                 return;
                             } else if (response.body().getError().equals("AUTH_ERROR")) {
+                                activityManager.onHomeNetHandler(false);
                                 handler.onAuthFailure();
                                 return;
                             }
@@ -56,6 +63,7 @@ public class CommentsProvider {
                     }
 
                     if (response.code() == 401) {
+                        activityManager.onHomeNetHandler(false);
                         handler.onAuthFailure();
                         return;
                     }
@@ -69,6 +77,7 @@ public class CommentsProvider {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorReturn((t) -> {
+                    activityManager.onHomeNetHandler(false);
                     handler.onRequestFailure(t);
                     return null;
                 })
@@ -76,9 +85,11 @@ public class CommentsProvider {
                     if (response.code() == 200) {
                         if (response.body() != null) {
                             if (response.body().getStatus()) {
+                                activityManager.onHomeNetHandler(response.body().getInHomeNet());
                                 handler.onPuted(response.body());
                                 return;
                             } else if (response.body().getError().equals("AUTH_ERROR")) {
+                                activityManager.onHomeNetHandler(false);
                                 handler.onAuthFailure();
                                 return;
                             }
@@ -86,6 +97,7 @@ public class CommentsProvider {
                     }
 
                     if (response.code() == 401) {
+                        activityManager.onHomeNetHandler(false);
                         handler.onAuthFailure();
                         return;
                     }
@@ -99,6 +111,7 @@ public class CommentsProvider {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorReturn((t) -> {
+                    activityManager.onHomeNetHandler(false);
                     handler.onRequestFailure(t);
                     return null;
                 })
@@ -106,9 +119,11 @@ public class CommentsProvider {
                     if (response.code() == 200) {
                         if (response.body() != null) {
                             if (response.body().getStatus()) {
+                                activityManager.onHomeNetHandler(response.body().getInHomeNet());
                                 handler.onPuted(response.body());
                                 return;
                             } else if (response.body().getError().equals("AUTH_ERROR")) {
+                                activityManager.onHomeNetHandler(false);
                                 handler.onAuthFailure();
                                 return;
                             }
@@ -116,6 +131,7 @@ public class CommentsProvider {
                     }
 
                     if (response.code() == 401) {
+                        activityManager.onHomeNetHandler(false);
                         handler.onAuthFailure();
                         return;
                     }

@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -50,6 +52,12 @@ public class MainScreenFragment extends BaseFragment implements MainScreenView {
 
     @BindView(R.id.btnAllTasks)
     Button btnAllTasks;
+
+    @BindView(R.id.ivHomeNet)
+    ImageView ivHomeNet;
+
+    @BindView(R.id.tvPlushki)
+    TextView tvPlushki;
 
     TasksListAdapter tasksListAdapter;
     ArrayList<TaskModel> tasksList;
@@ -176,6 +184,16 @@ public class MainScreenFragment extends BaseFragment implements MainScreenView {
         getBaseActivity().startActivity(TasksActivity.class);
     }
 
+    @Override
+    public void onGetNet(boolean home) {
+        ivHomeNet.setVisibility(home ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void onGetPlushki(Integer count) {
+        tvPlushki.setText(count.toString());
+    }
+
     public void openClientItem(ClientModel item) {
         Intent intent = new Intent(getBaseActivity(), ClientsActivity.class);
         intent.putExtra("CLIENT_ITEM", item);
@@ -208,5 +226,12 @@ public class MainScreenFragment extends BaseFragment implements MainScreenView {
                 tasksListAdapter.notifyDataSetChanged();
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.getNet();
+        presenter.getPlushki();
     }
 }

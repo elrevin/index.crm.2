@@ -13,6 +13,8 @@ public class ApiMethods {
     static final String GET_NEWS_COMMENTS_LIST = "api.php?module=news&method=getComments";
     static final String PUT_NEWS_COMMENT = "api.php?module=news&method=putComment";
     static final String PUT_NEWS_COMMENT_RATE = "api.php?module=news&method=putRate";
+    static final String GET_NET = "api.php?module=users&method=getNet";
+    static final String GET_PLUSHKI = "api.php?module=users&method=getPlushki";
 
     public static final String getBasicAuthString(String login, String password) {
         return "Basic " + Base64.encodeToString(String.format("%s:%s", login, password).getBytes(), Base64.NO_WRAP);
