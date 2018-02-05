@@ -6,6 +6,7 @@ import dagger.Component;
 import me.elrevin.indexcrm.mvp.model.BaseModel;
 import me.elrevin.indexcrm.mvp.presenter.ClientsListPresenter;
 import me.elrevin.indexcrm.mvp.presenter.ClientsPresenter;
+import me.elrevin.indexcrm.mvp.presenter.EmployeesPresenter;
 import me.elrevin.indexcrm.mvp.presenter.MainScreenPresenter;
 import me.elrevin.indexcrm.mvp.presenter.NewsItemPresenter;
 import me.elrevin.indexcrm.mvp.presenter.NewsPresenter;
@@ -21,6 +22,7 @@ import me.elrevin.indexcrm.providers.news.NewsProvider;
 import me.elrevin.indexcrm.providers.tasks.TasksProvider;
 import me.elrevin.indexcrm.rest.models.BaseRequestModel;
 import me.elrevin.indexcrm.ui.activity.BaseActivity;
+import me.elrevin.indexcrm.ui.activity.EmployeesActivity;
 import me.elrevin.indexcrm.ui.activity.LoginActivity;
 import me.elrevin.indexcrm.di.module.ApplicationModule;
 import me.elrevin.indexcrm.ui.fragment.AuthFirstFragment;
@@ -35,6 +37,7 @@ public interface ApplicationComponent {
     // Activities
     void inject(BaseActivity activity);
     void inject(LoginActivity activity);
+    void inject(EmployeesActivity activity);
 
     // Fragments
     void inject(BaseFragment fragment);
@@ -52,6 +55,7 @@ public interface ApplicationComponent {
     void inject(TasksListPresenter presenter);
     void inject(TaskItemPresenter presenter);
     void inject(NewsPresenter presenter);
+    void inject(EmployeesPresenter presenter);
 
     // Providers
     void inject(CurrentUserProvider provider);

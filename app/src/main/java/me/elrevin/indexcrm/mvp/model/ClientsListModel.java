@@ -14,4 +14,5 @@ public class ClientsListModel extends BaseModel {
 
     public void setList(java.util.List<ClientModel> list) {
         this.list = list;
-    }}
+    }
+}

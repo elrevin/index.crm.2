@@ -228,16 +228,6 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
                     .alpha(1f)
                     .setDuration(mShortAnimationDuration)
                     .setListener(null);
-
-            llContent.animate()
-                    .alpha(0f)
-                    .setDuration(mShortAnimationDuration)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            llContent.setVisibility(View.GONE);
-                        }
-                    });
         }
         loadingStarts++;
     }
@@ -256,10 +246,6 @@ abstract public class BaseActivity extends MvpAppCompatActivity {
                             pbSpinner.setVisibility(View.GONE);
                         }
                     });
-            llContent.animate()
-                    .alpha(1f)
-                    .setDuration(mShortAnimationDuration)
-                    .setListener(null);
         }
         if (loadingStarts > 0) {
             loadingStarts--;

@@ -46,7 +46,7 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_call_black_24px"
+                card_view:srcCompat="@drawable/ic_call_black_24px"
                 android:background="@color/colorTransparent"
                 android:paddingLeft="16dp"
                 android:id="@+id/btnCall"

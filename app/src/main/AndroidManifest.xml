@@ -31,7 +31,8 @@
         <activity
             android:name=".ui.activity.NewsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
-        <activity android:name=".ui.activity.TasksActivity"></activity>
+        <activity android:name=".ui.activity.TasksActivity" />
+        <activity android:name=".ui.activity.EmployeesActivity"></activity>
     </application>
 
 </manifest>
